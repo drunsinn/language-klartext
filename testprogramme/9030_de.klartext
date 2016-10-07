@@ -1,0 +1,95 @@
+0  BEGIN PGM 9030_de MM 
+1  ;NC-Programm, um eine definierte
+2  ;Auftragsnummer und eine 
+3  ;fortlaufende Stueckzahl auf
+4  ;ein Werkstueck zu gravieren.
+5  ;Die Auftragsnummer definieren Sie
+6  ;in einer Tabelle, dort tragen Sie
+7  ;jede Ziffer in eine Spalte ein.
+8  ;Diese liest die Steuerung
+9  ;dann nach und nach aus und
+10 ;graviert die Ziffer. Auch die
+11 ;Stueckzahl speichert die Steuerung
+12 ;in einer Tabelle, damit Sie ueber
+13 ;eine Stromunterbrechung hinaus 
+14 ;erhalten bleibt. Vor dem
+15 ;Gravieren liest die Steuerung die
+16 ;bis dahin erfolgten Durchlaeufe
+17 ;aus der Tabelle, rechnet einen
+18 ;hinzu, schreibt den neuen Wert in
+19 ;die Tabelle und graviert die 
+20 ;Stueckzahl auf das Werkstueck.
+21 ;Vor dem Programmstart muessen Sie
+22 ;das Gravierwerkzeug und die
+23 ;Parameter fuer das Gravieren der
+24 ;Auftragsnummer und der Stueckzahl
+25 ;definieren. Ausserdem muessen Sie
+26 ;die Auftragsnummer in Tabelle
+27 ;90303_de.tab definieren und die
+28 ;Stueckzahl in der Tabelle
+29 ;90304_de.tab auf Null zurueck-
+30 ;setzen.
+31 ;!!WICHTIG!! Programmdurchlaeufe
+32 ;im Programmtest werden beim
+33 ;Stueckzaehler mitgezaehlt!!!
+34 ;
+35 BLK FORM 0.1 Z  X+0  Y+0  Z-40
+36 BLK FORM 0.2  X+100  Y+100  Z+0
+37 ;
+38 ;Werkzeugaufruf Gravierwerkzeug
+39 TOOL CALL 200 Z S5000
+40 ;
+41 ;Freifahren
+42 L  Z+100 R0 FMAX M3
+43 ;
+44 ;Gravieren der Auftragsnummer
+45 ;aus der Tabelle
+46 ;
+47 ;Parametereingabe
+48 FN 0: Q2 =+1 ;MASSFAKTORWIRKUNG 2D (1) oder 3D (0)
+49 FN 0: Q4 =-1 ;FRAESTIEFE
+50 FN 0: Q6 =+1000 ;VORSCHUB FRAESEN
+51 FN 0: Q7 =+200 ;VORSCHUB TIEFENZUSTELLUNG
+52 FN 0: Q8 =+1 ;SICHERHEITSABSTAND
+53 FN 0: Q5 =+10 ;SCHRIFTHOEHE
+54 FN 0: Q21 =+20 ;X STARTPUNKT
+55 FN 0: Q22 =+60 ;Y STARTPUNKT
+56 FN 0: Q29 =+0 ;ROTATION
+57 ;Parametereingabe Ende
+58 ;
+59 ;Programmaufruf zum Gravieren der
+60 ;Auftragsnummer
+61 CALL PGM 90301_de.h
+62 ;
+63 ;
+64 ;Gravieren der Stueckzahl
+65 ;
+66 ;Parametereingabe
+67 FN 0: Q2 =+1 ;MASSFAKTORWIRKUNG 2D (1) oder 3D (0)
+68 FN 0: Q4 =-1 ;FRAESTIEFE
+69 FN 0: Q6 =+1000 ;VORSCHUB FRAESEN
+70 FN 0: Q7 =+200 ;VORSCHUB TIEFENZUSTELLUNG
+71 FN 0: Q8 =+1 ;SICHERHEITSABSTAND
+72 FN 0: Q5 =+10 ;SCHRIFTHOEHE
+73 FN 0: Q21 =+20 ;X STARTPUNKT
+74 FN 0: Q22 =+40 ;Y STARTPUNKT
+75 FN 0: Q29 =+0 ;ROTATION
+76 ;Parametereingabe Ende
+77 ;
+78 ;
+79 ;Tabelle oeffnen
+80 FN 26: TABOPEN 90304_de.TAB
+81 ;Bisherige Stueckzahl lesen
+82 FN 28: TABREAD Q80 =0 /"Stueck"
+83 ;Stueckzahl weiterrechnen
+84 FN 1: Q80 =+Q80 + +1
+85 ;Neuen Wert in Tabelle schreiben
+86 FN 27: TABWRITE 0 /"Stueck" = Q80
+87 ;
+88 ;Programmaufruf zum Gravieren der
+89 ;Stueckzahl
+90 CALL PGM 90302_de.h
+91 ;
+92 ;Freifahren und Programmende
+93 L  Z+100 R0 FMAX M30
+94 END PGM 9030_de MM 

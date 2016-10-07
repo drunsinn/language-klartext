@@ -1,0 +1,105 @@
+0  BEGIN PGM 3170_DE MM 
+1  ;Programm, um ein konisches Innengewinde zu
+2  ;fraesen.
+3  ;Die Werkzeugbahn wird in lineare Schritte
+4  ;aufgeteilt. Mit der Teilung definieren Sie,
+5  ;in wie viele lineare Elemente eine 360-Grad-
+6  ;Bahn aufgeteilt wird. Die Steuerung berechnet
+7  ;zu jedem dieser linearen Schritte eine
+8  ;X-, Y- und Z-Koordinate, die angefahren
+9  ;werden. Die Bearbeitung erfolgt von unten
+10 ;nach oben. Mit dem Umlaufsinn legen Sie fest,
+11 ;ob ein rechts- oder linksgaengiges Gewinde
+12 ;entsteht.
+13 ;
+14 BLK FORM 0.1 Z X+0 Y+0 Z-32
+15 BLK FORM 0.2  X+100  Y+100  Z+0
+16 ;
+17 ;Programmaufruf zum Vorfräsen des innen Konus
+18 ;! In dem gerufenen Programm muessen Daten,
+19 ;zum Beispiel Werkzeugnummer, Schnittdaten und
+20 ;Parameter, angepasste werden!
+21 CALL PGM 31701_de.h
+22 ;
+23 ;Werkzeugaufruf Gewindefraeser
+24 TOOL CALL 10 Z S5000
+25 ;
+26 ;Parametereingabe
+27 FN 0: Q1 =+50 ;MITTE X
+28 FN 0: Q2 =+50 ;MITTE Y
+29 FN 0: Q4 =+1 ;UMLAUFSINN +/-1
+30 ;            ;-1=IM UHRZEIGERSINN
+31 ;            ;+1=GEGEN UHRZEIGERSINN
+32 FN 0: Q5 =+30 ;TEILUNG
+33 FN 0: Q6 =+40 ;AUSSENRADIUS UNTEN
+34 FN 0: Q7 =+0 ;STARTWINKEL
+35 FN 0: Q8 =+15 ;KEGELWINKEL
+36 FN 0: Q9 =+3 ;STEIGUNG
+37 FN 0: Q10 =+2 ;SICHERE HOEHE
+38 FN 0: Q11 =+300 ;VORSCHUB VORPOSITIONIEREN
+39 FN 0: Q12 =+1000 ;VORSCHUB FRAESEN
+40 FN 0: Q3 =-30 ;Z-KOORDINATE START (UNTEN)
+41 FN 0: Q13 =+0 ;Z-KOORDINATE ENDE (OBEN)
+42 FN 0: Q14 =+1 ;AUFMASS IN DER EBENE X/Y
+43 FN 0: Q16 =+2 ;SICHERHEITSABSTAND SEITLICH
+44 ;Parametereingabe Ende
+45 ;
+46 ;Aufruf der Bearbeitung
+47 CALL LBL 1
+48 STOP
+49 ;
+50 ;Parametereingabe Schlichten
+51 FN 0: Q5 =+360 ;TEILUNG
+52 FN 0: Q12 =+500 ;VORSCHUB FRAESEN
+53 FN 0: Q14 =+0 ;AUFMASS IN DER EBENE X/Y
+54 ;
+55 ;Aufruf der Bearbeitung
+56 CALL LBL 1
+57 ;
+58 ;Freifahren und Programmende
+59 L  Z+100 R0 FMAX M30
+60 ;
+61 ;Bearbeitung
+62 LBL 1
+63 ;Berechnungen
+64 FN 3: Q31 =+Q16 * -1 ;Verrechnung Sicherheitsabstand seitlich
+65 FN 3: Q38 =+Q108 * -1 ;Verrechnung Werkzeugradius
+66 FN 3: Q39 =+Q14 * -1 ;Verrechnung Aufmass
+67 FN 0: Q23 =+Q3 ;Z-Koordinate aktuell
+68 FN 0: Q25 =+0 ;Zaehler
+69 FN 1: Q26 =+Q6 + +Q38 ;Werkzeugradiuskompensation
+70 FN 1: Q26 =+Q26 + +Q39 ;Aufmasskompensation
+71 FN 1: Q28 =+Q26 + +Q31 ;Radius Vorpositionierung
+72 FN 0: Q27 =+Q7 ;Winkel aktuell
+73 Q36 = TAN Q8 * Q9 ;Radiusaenderung je 360 Grad
+74 FN 4: Q36 =+Q36 DIV +Q5 ;Schrittgroesse Radius
+75 FN 4: Q37 =+360 DIV +Q5 ;Schrittgroesse Winkel
+76 FN 3: Q37 =+Q37 * +Q4 ;Winkelschritt im Umlaufsinn
+77 FN 2: Q35 =+Q13 - +Q3 ;Z-Bereich
+78 Q33 = Q9 / Q5 * SGN Q35 ;Schrittgroesse Z
+79 Q35 = ( Q13 - Q3 ) / Q33 ;Anzahl der Z-Schritte
+80 Q35 = ABS Q35 ;Zaehlwert positiv
+81 ;Berechnungen Ende
+82 ;
+83 CC  X+Q1  Y+Q2 ;Mittelpunkt definieren
+84 LP  PR+Q28  PA+Q7 R0 FMAX M3 ;Vorpositionieren
+85 L  Z+Q10 R0 FMAX ;Auf Sicherheitsabstand fahren
+86 L  Z+Q3 R0 FQ11 ;Auf Z Startkoordinate fahren
+87 LP  PR+Q26  PA+Q7 R0 FQ12 ;Auf Startradius fahren
+88 LBL 2 ;Wiederholung
+89 FN 1: Q26 =+Q26 + +Q36 ;Radius aktualisieren
+90 FN 1: Q27 =+Q27 + +Q37 ;Winkel aktualisieren
+91 FN 7: Q21 = COS +Q27 ;Berechnung X-Koordinate
+92 FN 3: Q21 =+Q21 * +Q26 ;Berechnung X-Koordinate
+93 FN 1: Q21 =+Q21 + +Q1 ;Neue X-Koordinate
+94 FN 6: Q22 = SIN +Q27 ;Berechnung Y-Koordinate
+95 FN 3: Q22 =+Q26 * +Q22 ;Berechnung Y-Koordinate
+96 FN 1: Q22 =+Q22 + +Q2 ;Neue Y-Koordinate
+97 FN 1: Q23 =+Q23 + +Q33 ;Neue Z-Koordinate
+98 FN 1: Q25 =+Q25 + +1 ;Zaehler aktualisieren
+99 L  X+Q21  Y+Q22  Z+Q23 FQ12 ;Neue Koordinaten anfahren
+100 FN 12: IF +Q25 LT +Q35 GOTO LBL 2 ;Vergleich ob Anzahl der Schritte erreicht
+101 LP IPR+Q31 ;Seitlich freifahren
+102 L  Z+Q10 R0 FMAX ;Auf Sicherheitsabstand fahren
+103 LBL 0
+104 END PGM 3170_DE MM 
