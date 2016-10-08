@@ -1,223 +1,239 @@
-'scopeName' : 'source.klartext';
 'fileTypes': [
   'klartext'
 ]
 'firstLineMatch': '^(\\d+) +(BEGIN PGM) (.*\\.H) (MM|INCH) ?$'
-'name': 'Klartext'
-
+'name': 'klartext'
+'scopeName' : 'source.klartext';
 'patterns': [
-  {
-    'match': '^(\\d+)'
-    'name': 'base.comment'
-    'comment': 'Zeilennummerierung'
-  },
-  {
-      'match': '(BEGIN|END) (PGM) (.*?)\\b(MM|INCH) ?$'
-      'comment': 'Programmkopf'
-      'captures':
-        '1':
-            'name': 'base.constant'
-        '2':
-            'name': 'base.constant'
-        '3':
-            'name': 'base.variable'
-        '4':
-            'name': 'base.variable'
-  },
     {
-      'match': '(BLK FORM) (0.1) ([XYZ]+)'
-      'comment': 'Blockform Quader 1. Zeile'
-      'captures':
-              '1':
-                  'name': 'base.constant'
-              '2':
-                  'name': 'base.variable'
-              '3':
-                  'name': 'base.constant'
+        'comment': 'Zeilennummerierung'
+        'match': '^(\\d+)'
+        'name': 'base.comment'
     },
     {
-      'match': '(BLK FORM) (0.2)'
-      'comment': 'Blockform Quader 2. Zeile'
-      'captures':
-              '1':
-                  'name': 'base.constant'
-              '2':
-                  'name': 'base.variable'
+        'comment': 'Kommentar am Zeilenende oder in einer eigenen Zeile'
+        'match': ';(.*)$'
+        'name': 'base.comment'
     },
-  {
-    'match': ';(.*)\n'
-    'comment': 'Kommentar am Zeilenende oder in einer eigenen Zeile'
-    'name': 'base.comment'
-  },
-  {
-    'match': '\\* - (.*)\n'
-    'comment': 'Gliederung'
-    'name': 'base.comment'
-  },
-  {
-      'match': '"(.*)"'
-      'comment': 'Zeichenkette zwischen doppelten Anführungszeichen'
-      'name': 'base.string'
-  },
-  {
-      'match': '(?: )((\\+|\\-)?Q[LSR]*[0-9]+)(?= =)'
-      'comment': 'Q-Parameter (auch String, Lokal und Remanent)'
-      'name': 'base.variable'
-  },
-  {
-      'match': '(F)((MAX)|(((Q[LR]*)*\\d+)|(\\d+)))'
-      'comment': 'Vorschubangabe'
-      'captures':
-        '1':
-            'name': 'base.constant'
-        '2':
-            'name': 'base.constant'
-        '3':
-            'name': 'base.variable'
-        '4':
-            'name': 'base.variable'
-  },
-  {
-      'match': '[^\\w](S)(((Q[LR]*)*\\d+)|(\\d+))'
-      'comment': 'Drehzahlangabe'
-      'captures':
-        '1':
-            'name': 'base.constant'
-        '2':
-            'name': 'base.constant'
-        '3':
-            'name': 'base.variable'
-        '4':
-            'name': 'base.variable'
-  },
-  {
-      'match': '(?: )(M)(\\d+)*'
-      'comment': 'M-Funktion'
-      'captures':
-        '1':
-            'name': 'base.constant'
-        '2':
-            'name': 'base.variable'
-  },
-  {
-      'match': '(?: )R((0[^(\\.|,)])|\\+|-)'
-      'comment': 'Radiuskorrektor'
-      'name': 'base.constant'
-  },
-  {
-      'match': '(?: )R(R|L)'
-      'comment': '?'
-      'name': 'base.constant'
-  },
-  {
-      'match': '(?: )DR(\\+|-)'
-      'comment': 'Drehrichtung'
-      'name': 'base.constant'
-  },
-  {
-      'match': '\\b(L|(C[CPR]*))\\b'
-      'comment': 'Linearsatz'
-      'name': 'base.entity.name.section'
-  },
-  {
-      'match': '\\b(STOP)\\b'
-      'comment': 'Programmunterbrechung'
-      'name': 'base.entity.name.section'
-  },
-  {
-      'match': '((I?[XYZ]+)(\\+|-)((\\d+((\\.|,)\\d+)*)|(Q[LR]*[0-9]+)))+'
-      'captures':
-        '1':
-            'name': 'base.constant'
-        '2':
-            'name': 'base.constant'
-        '3':
-            'name': 'base.variable'
-        '4':
-            'name': 'base.variable'
-  }
-  {
-      'match': '\\b(CALL LBL )((\\"\\w+\\")|(\\d+)|(Q[LSR]*[0-9]+))(\\sREP((\\d+)|(Q[LR]*[0-9]+)))?'
-      'comment': 'Labelaufruf'
-      'captures':
-        '1':
-            'name': 'base.entity.name.section'
-        '2':
-            'name': 'base.constant'
-        '3':
-            'name': 'base.variable'
-        '4':
-            'name': 'base.variable'
-        '5':
-            'name': 'base.variable'
-        '6':
-            'name': 'base.constant'
-        '7':
-            'name': 'base.variable'
-  },
-  {
-      'match': '\\b(LBL )((\\"\\w+\\")|(\\d+))'
-      'comment': 'Labeldefinition'
-      'captures':
-        '1':
-            'name': 'base.constant'
-        '2':
-            'name': 'base.constant'
-        '3':
-            'name': 'base.variable'
-        '4':
-            'name': 'base.variable'
-  },
-   {
-     'match': '\\b(CALL PGM) (.*)'
-     'comment': 'Unterprogrammaufruf'
-     'captures':
-             '1':
-                 'name': 'base.entity.name.section'
-             '2':
-                 'name': 'base.variable'
-   },
-  {
-      'match': '\\b(TOOL CALL) (.*) ([XYZ]+)'
-      'captures':
-        '1':
-            'name': 'base.entity.name.section'
-        '2':
-            'name': 'base.variable'
-        '3':
-            'name': 'base.constant'
-  }
-  {
-    'comment': 'keyword'
-    'match': '\\b(FN|: IF|NE|LT|GT|GOTO)\\b'
-    'name': 'base.entity.name.section'
-  }
-  {
-    'comment': 'keyword'
-    'match': '\\b(SRC_|SEA_|(BEG(?!IN))|LEN)'
-    'name': 'base.entity.name.section'
-  }
-  {
-    'comment': 'keyword'
-    'match': '\\b(STRCOMP|SUBSTR|STRLEN|(CYCL CALL( POS)?))'
-    'name': 'base.entity.name.section'
-  }
-  {
-      'match': '\\b(CYCL DEF) (\\d+\\.\\d+)'
-      'captures':
-        '1':
-            'name': 'base.constant'
-        '2':
-            'name': 'base.variable'
-  }
-  {
-      'match': '\\b(CYCL DEF) (\\d+) (.* ~)$'
-      'captures':
-        '1':
-            'name': 'base.constant'
-        '2':
-            'name': 'base.variable'
-        '3':
-            'name': 'base.comment'
-  }
+    {
+        'comment': 'Zeichenkette zwischen doppelten Anführungszeichen'
+        'match': '"(.*)"'
+        'name': 'base.string'
+    },
+    {
+        'comment': 'Gliederung'
+        'match': '\\* - (.*)$'
+        'name': 'base.comment'
+    },
+    {
+        'comment': 'Programmkopf'
+        'match': '(BEGIN|END) (PGM) (.*?)\\b(MM|INCH) ?$'
+        'captures':
+            '1':
+                'name': 'base.constant'
+            '2':
+                'name': 'base.constant'
+            '3':
+                'name': 'base.variable'
+            '4':
+                'name': 'base.constant'
+    },
+    {
+        'comment': 'Blockform Quader 1. Zeile'
+        'match': '(BLK FORM) (0.1) ([XYZ]+)\\b'
+        'captures':
+            '1':
+                'name': 'base.constant'
+            '2':
+                'name': 'base.constant'
+            '3':
+                'name': 'base.variable'
+    },
+    {
+        'comment': 'Blockform Quader 2. Zeile'
+        'match': '(BLK FORM) (0.2)\\b'
+        'name': 'base.constant'
+    },
+    {
+        'comment': 'Koordinate mit Zahl oder Q-Parameter'
+        'match': '\\b(I?[XYZ]+)(\\+|-)((\\d+((\\.|,)\\d+)*)|(Q[LR]*[0-9]+))\\b'
+        'captures':
+            '1':
+                'name': 'base.constant'
+            '2':
+                'name': 'base.variable'
+            '3':
+                'name': 'base.variable'
+    }
+    {
+        'comment': 'Polare Koordinaten mit Zahl oder Q-Parameter'
+        'match': '\\b(I*PA|PR)(\\+|-)((\\d+((\\.|,)\\d+)*)|(Q[LR]*[0-9]+))'
+        'captures':
+            '1':
+                'name': 'base.constant'
+            '2':
+                'name': 'base.variable'
+            '3':
+                'name': 'base.variable'
+    },
+    {
+        'comment': 'Q-Parameter (auch String, Lokal und Remanent)'
+        'match': '\\b((\\+|\\-)?Q[LSR]*[0-9]+)\\b'
+        'name': 'base.variable'
+    },
+    {
+        'comment': 'Vorschubangabe mit Zahl oder Q-Parameter'
+        'match': '\\b(F)(MAX|Q[LR]*\\d+|\\d+| AUTO)\\b'
+        'captures':
+            '1':
+                'name': 'base.constant'
+            '2':
+                'name': 'base.variable'
+    },
+    {
+        'match': '\\b(S)(Q[LR]*\\d+|\\d+)\\b'
+        'comment': 'Drehzahlangabe mit Zahl oder Q-Parameter'
+        'captures':
+            '1':
+                'name': 'base.constant'
+            '2':
+                'name': 'base.variable'
+    },
+    {
+        'comment': 'M-Funktion'
+        'match': '\\b(M)(\\d+)\\b'
+        'captures':
+            '1':
+                'name': 'base.entity.name.section'
+            '2':
+                'name': 'base.variable'
+    },
+    {
+        'comment': 'Radiuskorrektor'
+        'match': '\\b(R)(0[^(\\.|,)]|\\+|-|R|L)'
+        'captures':
+            '1':
+                'name': 'base.constant'
+            '2':
+                'name': 'base.variable'
+    },
+    {
+        'comment': 'Drehsinn bei Kreisbewegung'
+        'match': '\\b(DR)(\\+|-)'
+        'captures':
+            '1':
+                'name': 'base.constant'
+            '2':
+                'name': 'base.variable'
+    },
+    {
+        'comment': 'Bewegungssätze'
+        'match': '\\b(L|C[CPR])\\b'
+        'name': 'base.entity.name.section'
+    },
+    {
+        'comment': 'Labelaufruf mit Angabe der Wiederhohlungen'
+        'match': '\\b(CALL LBL )((\\"\\w+\\")|(\\d+)|(Q[LSR]*[0-9]+))(\\sREP((\\d+)|(Q[LR]*[0-9]+)))?'
+        'captures':
+            '1':
+                'name': 'base.entity.name.section'
+            '2':
+                'name': 'base.constant'
+            '3':
+                'name': 'base.variable'
+            '4':
+                'name': 'base.variable'
+            '5':
+                'name': 'base.variable'
+            '6':
+                'name': 'base.constant'
+            '7':
+                'name': 'base.variable'
+    },
+    {
+        'comment': 'Labeldefinition'
+        'match': '\\b(LBL )((\\"\\w+\\")|(\\d+))'
+        'captures':
+            '1':
+                'name': 'base.constant'
+            '2':
+                'name': 'base.constant'
+            '3':
+                'name': 'base.variable'
+            '4':
+                'name': 'base.variable'
+    },
+    {
+        'comment': 'Unterprogrammaufruf'
+        'match': '\\b(CALL PGM) (.*)'
+        'captures':
+            '1':
+                'name': 'base.entity.name.section'
+            '2':
+                'name': 'base.variable'
+    },
+    {
+        'comment': 'Werkzeugaufruf mit Angabe der Bearbeitungsebene'
+        'match': '\\b(TOOL CALL) (.*) ([XYZ]+)'
+        'captures':
+            '1':
+                'name': 'base.entity.name.section'
+            '2':
+                'name': 'base.variable'
+            '3':
+                'name': 'base.constant'
+    },
+    {
+        'comment': 'Zyklendefinition - alter Stiel'
+        'match': '\\b(CYCL DEF) (\\d+\\.\\d+)'
+        'captures':
+            '1':
+                'name': 'base.constant'
+            '2':
+                'name': 'base.variable'
+    },
+    {
+        'comment': 'Zyklendefinition - neuer Stiel'
+        'match': '\\b(CYCL DEF) (\\d+) (.* ~)$'
+        'captures':
+            '1':
+                'name': 'base.constant'
+            '2':
+                'name': 'base.variable'
+            '3':
+                'name': 'base.comment'
+    },
+    {
+        'comment': 'Zyklendefinition - neuer Stiel Vortsetzung'
+        'match': '^\\s+(Q\\d+)(=)(\\+|-)((\\d+((\\.|,)\\d+)*)|(Q[LR]*[0-9]+))'
+        'captures':
+            '1':
+                'name': 'base.constant'
+            '2':
+                'name': 'base.variable'
+            '3':
+                'name': 'base.variable'
+            '4':
+                'name': 'base.variable'
+    },
+    {
+        'match': '\\b(STOP)'
+        'comment': 'Programmunterbrechung'
+        'name': 'base.entity.name.section'
+    },
+    {
+        'comment': 'keyword'
+        'match': '\\b(FN|: IF|NE|LT|GT|GOTO)\\b'
+        'name': 'base.entity.name.section'
+    },
+    {
+        'comment': 'keyword'
+        'match': '\\b(SRC_|SEA_|(BEG(?!IN))|LEN)'
+        'name': 'base.entity.name.section'
+    },
+    {
+        'comment': 'keyword'
+        'match': '\\b(STRCOMP|SUBSTR|STRLEN|(CYCL CALL( POS)?))'
+        'name': 'base.entity.name.section'
+    },
 ]
