@@ -1,5 +1,7 @@
 'fileTypes': [
   'klartext'
+  'h'
+  'H'
 ]
 'firstLineMatch': '^(\\d+) +(BEGIN PGM) (.*\\.H) (MM|INCH) ?$'
 'name': 'klartext'
@@ -67,7 +69,7 @@
     }
     {
         'comment': 'polar coordinate with number or Q-parameter'
-        'match': '\\b(I*PA|PR)(\\+|-)((\\d+((\\.|,)\\d+)*)|(Q[LR]*[0-9]+))'
+        'match': '\\b(I*PA|I*PR)(\\+|-)((\\d+((\\.|,)\\d+)*)|(Q[LR]*[0-9]+))'
         'captures':
             '1':
                 'name': 'base.constant'
@@ -228,6 +230,11 @@
                 'name': 'base.variable'
     },
     {
+        'comment': 'cycle call'
+        'match': '\\b(CYCL CALL( POS| PAT)?)'
+        'name': 'base.constant'
+    },
+    {
         'comment': 'program stop'
         'match': '\\b(STOP)'
         'name': 'base.entity.name.section'
@@ -244,12 +251,17 @@
     },
     {
         'comment': 'keywords for FN functions'
-        'match': '\\b(STRCOMP|SUBSTR|STRLEN|(CYCL CALL( POS)?))'
+        'match': '\\b(DECLARE STRING|STRCOMP|SUBSTR|STRLEN|INSTR)'
         'name': 'base.constant'
     },
     {
         'comment': 'keywords for FN functions'
-        'match': '\\b(TABOPEN|TABREAD|TABWRITE)'
+        'match': '\\b(TABOPEN|TABREAD|TABWRITE|SYSREAD|F-PRINT)'
+        'name': 'base.constant'
+    },
+    {
+        'comment': 'keywords for FN functions'
+        'match': '\\b(DIV|EQU|COS|SIN)'
         'name': 'base.constant'
     },
 ]
