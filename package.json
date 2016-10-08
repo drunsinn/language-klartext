@@ -1,6 +1,6 @@
 {
   "name": "language-klartext",
-  "version": "0.2.3",
+  "version": "0.1.0",
   "description": "A short description of your syntax theme",
   "keywords": [
     "syntax",
@@ -9,7 +9,7 @@
   "dependencies": {},
   "readme": "# language-klartext",
   "readmeFilename": "README.md",
-  "repository": "https://github.com/atom/language-klartext",
+  "repository": "https://github.com/.......",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"

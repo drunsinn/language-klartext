@@ -6,27 +6,27 @@
 'scopeName' : 'source.klartext';
 'patterns': [
     {
-        'comment': 'Zeilennummerierung'
+        'comment': 'line number'
         'match': '^(\\d+)'
         'name': 'base.comment'
     },
     {
-        'comment': 'Kommentar am Zeilenende oder in einer eigenen Zeile'
+        'comment': 'comment until the end of the line'
         'match': ';(.*)$'
         'name': 'base.comment'
     },
     {
-        'comment': 'Zeichenkette zwischen doppelten Anführungszeichen'
+        'comment': 'string between double quotes'
         'match': '"(.*)"'
         'name': 'base.string'
     },
     {
-        'comment': 'Gliederung'
+        'comment': 'outline'
         'match': '\\* - (.*)$'
         'name': 'base.comment'
     },
     {
-        'comment': 'Programmkopf'
+        'comment': 'program head and foot'
         'match': '(BEGIN|END) (PGM) (.*?)\\b(MM|INCH) ?$'
         'captures':
             '1':
@@ -39,7 +39,7 @@
                 'name': 'base.constant'
     },
     {
-        'comment': 'Blockform Quader 1. Zeile'
+        'comment': 'block form cuboid - first line'
         'match': '(BLK FORM) (0.1) ([XYZ]+)\\b'
         'captures':
             '1':
@@ -50,12 +50,12 @@
                 'name': 'base.variable'
     },
     {
-        'comment': 'Blockform Quader 2. Zeile'
+        'comment': 'block form cuboid - second line'
         'match': '(BLK FORM) (0.2)\\b'
         'name': 'base.constant'
     },
     {
-        'comment': 'Koordinate mit Zahl oder Q-Parameter'
+        'comment': 'cartesian coordinate with number or Q-parameter'
         'match': '\\b(I?[XYZ]+)(\\+|-)((\\d+((\\.|,)\\d+)*)|(Q[LR]*[0-9]+))\\b'
         'captures':
             '1':
@@ -66,7 +66,7 @@
                 'name': 'base.variable'
     }
     {
-        'comment': 'Polare Koordinaten mit Zahl oder Q-Parameter'
+        'comment': 'polar coordinate with number or Q-parameter'
         'match': '\\b(I*PA|PR)(\\+|-)((\\d+((\\.|,)\\d+)*)|(Q[LR]*[0-9]+))'
         'captures':
             '1':
@@ -77,12 +77,12 @@
                 'name': 'base.variable'
     },
     {
-        'comment': 'Q-Parameter (auch String, Lokal und Remanent)'
+        'comment': 'Q-parameter (normal, string, lokal and remanent)'
         'match': '\\b((\\+|\\-)?Q[LSR]*[0-9]+)\\b'
         'name': 'base.variable'
     },
     {
-        'comment': 'Vorschubangabe mit Zahl oder Q-Parameter'
+        'comment': 'feedrate with number or Q-parameter'
         'match': '\\b(F)(MAX|Q[LR]*\\d+|\\d+| AUTO)\\b'
         'captures':
             '1':
@@ -91,8 +91,8 @@
                 'name': 'base.variable'
     },
     {
+        'comment': 'spindle speed with number or Q-parameter'
         'match': '\\b(S)(Q[LR]*\\d+|\\d+)\\b'
-        'comment': 'Drehzahlangabe mit Zahl oder Q-Parameter'
         'captures':
             '1':
                 'name': 'base.constant'
@@ -100,7 +100,7 @@
                 'name': 'base.variable'
     },
     {
-        'comment': 'M-Funktion'
+        'comment': 'machine function'
         'match': '\\b(M)(\\d+)\\b'
         'captures':
             '1':
@@ -109,7 +109,7 @@
                 'name': 'base.variable'
     },
     {
-        'comment': 'Radiuskorrektor'
+        'comment': 'tool radius correction'
         'match': '\\b(R)(0[^(\\.|,)]|\\+|-|R|L)'
         'captures':
             '1':
@@ -118,7 +118,7 @@
                 'name': 'base.variable'
     },
     {
-        'comment': 'Drehsinn bei Kreisbewegung'
+        'comment': 'direction of rotation for circular motion'
         'match': '\\b(DR)(\\+|-)'
         'captures':
             '1':
@@ -127,12 +127,23 @@
                 'name': 'base.variable'
     },
     {
-        'comment': 'Bewegungssätze'
-        'match': '\\b(L|C[CPR])\\b'
+        'comment': 'linear and circular motion'
+        'match': '\\b(L[P]?|C[CPR]|CT[P]?)\\b'
         'name': 'base.entity.name.section'
     },
     {
-        'comment': 'Labelaufruf mit Angabe der Wiederhohlungen'
+        'comment': 'contour parts'
+        'match': '\\b(RND R)((\\d+((\\.|,)\\d+)*)|(Q[LR]*[0-9]+))'
+        'captures':
+            '1':
+                'name': 'base.constant'
+            '2':
+                'name': 'base.variable'
+            '3':
+                'name': 'base.variable'
+    },
+    {
+        'comment': 'lable call with number of repititions'
         'match': '\\b(CALL LBL )((\\"\\w+\\")|(\\d+)|(Q[LSR]*[0-9]+))(\\sREP((\\d+)|(Q[LR]*[0-9]+)))?'
         'captures':
             '1':
@@ -151,7 +162,7 @@
                 'name': 'base.variable'
     },
     {
-        'comment': 'Labeldefinition'
+        'comment': 'lable definition'
         'match': '\\b(LBL )((\\"\\w+\\")|(\\d+))'
         'captures':
             '1':
@@ -164,7 +175,7 @@
                 'name': 'base.variable'
     },
     {
-        'comment': 'Unterprogrammaufruf'
+        'comment': 'program call'
         'match': '\\b(CALL PGM) (.*)'
         'captures':
             '1':
@@ -173,7 +184,7 @@
                 'name': 'base.variable'
     },
     {
-        'comment': 'Werkzeugaufruf mit Angabe der Bearbeitungsebene'
+        'comment': 'tool call'
         'match': '\\b(TOOL CALL) (.*) ([XYZ]+)'
         'captures':
             '1':
@@ -184,7 +195,7 @@
                 'name': 'base.constant'
     },
     {
-        'comment': 'Zyklendefinition - alter Stiel'
+        'comment': 'cycle definition - old style'
         'match': '\\b(CYCL DEF) (\\d+\\.\\d+)'
         'captures':
             '1':
@@ -193,7 +204,7 @@
                 'name': 'base.variable'
     },
     {
-        'comment': 'Zyklendefinition - neuer Stiel'
+        'comment': 'cycle definition - new style'
         'match': '\\b(CYCL DEF) (\\d+) (.* ~)$'
         'captures':
             '1':
@@ -204,7 +215,7 @@
                 'name': 'base.comment'
     },
     {
-        'comment': 'Zyklendefinition - neuer Stiel Vortsetzung'
+        'comment': 'cycle definition - new style - continuation'
         'match': '^\\s+(Q\\d+)(=)(\\+|-)((\\d+((\\.|,)\\d+)*)|(Q[LR]*[0-9]+))'
         'captures':
             '1':
@@ -217,23 +228,28 @@
                 'name': 'base.variable'
     },
     {
+        'comment': 'program stop'
         'match': '\\b(STOP)'
-        'comment': 'Programmunterbrechung'
         'name': 'base.entity.name.section'
     },
     {
-        'comment': 'keyword'
+        'comment': 'keywords for FN functions'
         'match': '\\b(FN|: IF|NE|LT|GT|GOTO)\\b'
-        'name': 'base.entity.name.section'
+        'name': 'base.constant'
     },
     {
-        'comment': 'keyword'
+        'comment': 'keywords for FN functions'
         'match': '\\b(SRC_|SEA_|(BEG(?!IN))|LEN)'
-        'name': 'base.entity.name.section'
+        'name': 'base.constant'
     },
     {
-        'comment': 'keyword'
+        'comment': 'keywords for FN functions'
         'match': '\\b(STRCOMP|SUBSTR|STRLEN|(CYCL CALL( POS)?))'
-        'name': 'base.entity.name.section'
+        'name': 'base.constant'
+    },
+    {
+        'comment': 'keywords for FN functions'
+        'match': '\\b(TABOPEN|TABREAD|TABWRITE)'
+        'name': 'base.constant'
     },
 ]
