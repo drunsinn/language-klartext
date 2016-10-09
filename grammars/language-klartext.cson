@@ -1,6 +1,5 @@
 'fileTypes': [
   'klartext'
-  'h'
   'H'
 ]
 'firstLineMatch': '^(\\d+) +(BEGIN PGM) (.*\\.H) (MM|INCH) ?$'
