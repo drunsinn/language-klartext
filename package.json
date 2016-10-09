@@ -1,6 +1,6 @@
 {
   "name": "language-klartext",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Syntax theme for the NC programing languages Klartext (used on HEIDENHAIN TNC controls) an g-code (aka DIN/ISO)",
   "keywords": [
     "syntax",
