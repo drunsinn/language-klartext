@@ -41,8 +41,8 @@
                 'name': 'base.constant'
     },
     {
-        'comment': 'block form cuboid - first line'
-        'match': '(BLK FORM) (0.1) ([XYZ]+)\\b'
+        'comment': 'block form cuboid'
+        'match': '\\b(BLK FORM) (0.[12])( [XYZ] )?'
         'captures':
             '1':
                 'name': 'base.constant'
@@ -52,13 +52,46 @@
                 'name': 'base.variable'
     },
     {
-        'comment': 'block form cuboid - second line'
-        'match': '(BLK FORM) (0.2)\\b'
-        'name': 'base.constant'
+        'comment': 'block form cylinder'
+        'match': '\\b(BLK FORM CYLINDER) ([XYZ]) (R)(\\d+) (L)(\\d+)( DIST)((\\+|-)\\d+)?( RI)(\\d+)?'
+        'captures':
+            '1':
+                'name': 'base.constant'
+            '2':
+                'name': 'base.variable'
+            '3':
+                'name': 'base.constant'
+            '4':
+                'name': 'base.variable'
+            '5':
+                'name': 'base.constant'
+            '6':
+                'name': 'base.variable'
+            '7':
+                'name': 'base.constant'
+            '8':
+                'name': 'base.variable'
+            '9':
+                'name': 'base.variable'
+            '10':
+                'name': 'base.constant'
+            '11':
+                'name': 'base.variable'
+    },
+    {
+        'comment': 'block form rotational body'
+        'match': '\\b(BLK FORM ROTATION) ([XYZ]) (DIM_[DR])'
+        'captures':
+            '1':
+                'name': 'base.constant'
+            '2':
+                'name': 'base.variable'
+            '3':
+                'name': 'base.variable'
     },
     {
         'comment': 'cartesian coordinate with number or Q-parameter'
-        'match': '\\b(I?[XYZ]+)(\\+|-)((\\d+((\\.|,)\\d+)*)|(Q[LR]*[0-9]+))\\b'
+        'match': '\\b(I?[ABCXYZ]+)(\\+|-)((\\d+((\\.|,)\\d+)*)|(Q[LR]*[0-9]+))\\b'
         'captures':
             '1':
                 'name': 'base.constant'
@@ -130,7 +163,7 @@
     },
     {
         'comment': 'linear and circular motion'
-        'match': '\\b(L[P]?|C[CPR]|CT[P]?)\\b'
+        'match': '\\b(L[P]?|C[CPR]?|CT[P]?)\\b'
         'name': 'base.entity.name.section'
     },
     {
@@ -186,14 +219,29 @@
                 'name': 'base.variable'
     },
     {
-        'comment': 'tool call'
-        'match': '\\b(TOOL CALL) (.*) ([XYZ]+)'
+        'comment': 'tool definition'
+        'match': '\\b(TOOL DEF) (.*)'
         'captures':
             '1':
                 'name': 'base.entity.name.section'
             '2':
                 'name': 'base.variable'
             '3':
+                'name': 'base.constant'
+    },
+    {
+        'comment': 'tool call'
+        'match': '\\b(TOOL CALL) (\\d+(\\.\\d+)?|\\"\\w+\\")( [XYZ]+)?'
+        'captures':
+            '1':
+                'name': 'base.entity.name.section'
+            '2':
+                'name': 'base.variable'
+            '3':
+                'name': 'base.constant'
+            '4':
+                'name': 'base.constant'
+            '5':
                 'name': 'base.constant'
     },
     {
@@ -218,7 +266,7 @@
     },
     {
         'comment': 'cycle definition - new style - continuation'
-        'match': '^\\s+(Q\\d+)(=)(\\+|-)((\\d+((\\.|,)\\d+)*)|(Q[LR]*[0-9]+))'
+        'match': '^\\s+(Q\\d+)(=)((\\+|-)(\\d+((\\.|,)\\d+)*)|(\\+|-)(Q[LR]*[0-9]+)| AUTO| MAX)'
         'captures':
             '1':
                 'name': 'base.constant'
@@ -240,9 +288,43 @@
         'name': 'base.entity.name.section'
     },
     {
+        'comment': 'special functions - TCPM'
+        'match': '\\b(FUNCTION)( RESET)?( TCPM)( F (CONT|TCP) AXIS (POS|SPAT) PATHCTRL (AXIS|VECTOR))?'
+        'captures':
+            '1':
+                'name': 'base.entity.name.section'
+            '2':
+                'name': 'base.variable'
+            '3':
+                'name': 'base.constant'
+            '4':
+                'name': 'base.variable'
+    },
+    {
+        'comment': 'special functions - PLANE'
+        'match': '\\b(PLANE) (RESET|SPATIAL|PROJECTED|EULER|VECTOR|POINTS|RELATIV|AXIAL)?( MOVE DIST(\\d+))?'
+        'captures':
+            '1':
+                'name': 'base.entity.name.section'
+            '2':
+                'name': 'base.constant'
+            '3':
+                'name': 'base.variable'
+            '4':
+                'name': 'base.constant'
+    },
+    {
         'comment': 'keywords for FN functions'
-        'match': '\\b(FN|: IF|NE|LT|GT|GOTO)\\b'
-        'name': 'base.constant'
+        'match': '\\b(FN )(\\d{1,2})(: )(IF|ERROR|F-PRINT|SYSREAD|PLC|WAIT FOR|EXPORT|TABOPEN|TABWRITE|TABREAD)?\\b'
+        'captures':
+            '1':
+                'name': 'base.constant'
+            '2':
+                'name': 'base.variable'
+            '3':
+                'name': 'base.constant'
+            '4':
+                'name': 'base.variable'
     },
     {
         'comment': 'keywords for FN functions'
@@ -256,12 +338,7 @@
     },
     {
         'comment': 'keywords for FN functions'
-        'match': '\\b(TABOPEN|TABREAD|TABWRITE|SYSREAD|F-PRINT)'
-        'name': 'base.constant'
-    },
-    {
-        'comment': 'keywords for FN functions'
-        'match': '\\b(DIV|EQU|COS|SIN)'
+        'match': '\\b(DIV|EQU|COS|SIN|TAN|LT|GT|GOTO)'
         'name': 'base.constant'
     },
 ]

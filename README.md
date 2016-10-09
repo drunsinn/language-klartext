@@ -1,6 +1,6 @@
 # language-klartext theme
 
-Syntax theme for the NC programing language Klartext used on HEIDENHAIN TNC controls
+Syntax theme for the NC programing languages Klartext (used on HEIDENHAIN TNC controls) an g-code (aka DIN/ISO)
 
 ![Screenshot](screenshot.png?raw=true "Screenshot")
 
