@@ -1,0 +1,129 @@
+'fileTypes': [
+  'i'
+  'nc'
+]
+'firstLineMatch': '^(%|\\(DFS)(.*)(\\*|RWED\\))$'
+'name': 'G-Code'
+'scopeName' : 'text.nc-code.g-code';
+'patterns': [
+    {
+        'comment': 'line number'
+        'match': '^N(\\d+)'
+        'name': 'base.comment'
+    },
+    {
+        'comment': 'comment until the end of the line'
+        'match': ';(.*)$'
+        'name': 'base.comment'
+    },
+    {
+        'comment': 'comment'
+        'match': '(\\( )(.*)( \\))$'
+        'captures':
+            '1':
+                'name': 'base.constant'
+            '2':
+                'name': 'base.string'
+            '3':
+                'name': 'base.constant'
+    },
+    {
+        'comment': 'commented out line'
+        'match': '^/N(\\d+)'
+        'name': 'base.comment'
+    },
+    {
+        'comment': 'program head'
+        'match': '(\\(DFS,)(.*)(,RWED\\))$'
+        'captures':
+            '1':
+                'name': 'base.constant'
+            '2':
+                'name': 'base.string'
+            '3':
+                'name': 'base.constant'
+    },
+    {
+        'comment': 'message output'
+        'match': '(\\(\\*MSG,)(.*)(\\))$'
+        'captures':
+            '1':
+                'name': 'base.constant'
+            '2':
+                'name': 'base.string'
+            '3':
+                'name': 'base.constant'
+    },
+    {
+        'comment': 'line termination'
+        'match': '\\*$'
+        'name': 'base.comment'
+    },
+    {
+        'comment': 'program name'
+        'match': '(%)([\\w\\d_]+)'
+        'captures':
+            '1':
+                'name': 'base.constant'
+            '2':
+                'name': 'base.string'
+    },
+    {
+        'comment': 'tool call'
+        'match': '\\b(T)(\\d*.\\d+)\\b'
+        'captures':
+            '1':
+                'name': 'base.constant'
+            '2':
+                'name': 'base.variable'
+    },
+    {
+        'comment': 'g-command'
+        'match': '\\b(G)(\\d+)((?:\\[)((-?\\d+\\.?\\d*),?)*\\])?'
+        'captures':
+            '1':
+                'name': 'base.keyword'
+            '2':
+                'name': 'base.variable'
+            '3':
+                'name': 'base.constant'
+    },
+    {
+        'comment': 'machine function'
+        'match': '\\b(M)(\\d+)\\b'
+        'captures':
+            '1':
+                'name': 'base.keyword'
+            '2':
+                'name': 'base.variable'
+    },
+    {
+        'comment': 'feedrate'
+        'match': '\\b(F)(\\d*.\\d+)\\b'
+        'captures':
+            '1':
+                'name': 'base.constant'
+            '2':
+                'name': 'base.variable'
+    },
+    {
+        'comment': 'spindle speed'
+        'match': '\\b(S)(\\d+)\\b'
+        'captures':
+            '1':
+                'name': 'base.constant'
+            '2':
+                'name': 'base.variable'
+    },
+    {
+        'comment': 'cartesian coordinate'
+        'match': '\\b([XYZ]+)(\\+|-)*(\\d+((\\.|,)\\d+)*)\\b'
+        'captures':
+            '1':
+                'name': 'base.constant'
+            '2':
+                'name': 'base.variable'
+            '3':
+                'name': 'base.variable'
+    }
+]

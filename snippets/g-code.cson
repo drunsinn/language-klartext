@@ -1,0 +1,16 @@
+'.nc.g-code':
+  'GwithX':
+    'prefix': 'GX'
+    'body': 'G$1 X$2'
+  'GwithY':
+    'prefix': 'GY'
+    'body': 'G$1 Y$2'
+  'GwithZ':
+    'prefix': 'GZ'
+    'body': 'G$1 Z$2'
+  'GwithXY':
+    'prefix': 'GXY'
+    'body': 'G$1 X$2 Y$3'
+  'Toolcall with spindel speed an machine function':
+    'prefix': 'TSM'
+    'body': 'T$1 S$2 M$3'

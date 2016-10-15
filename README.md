@@ -2,7 +2,7 @@
 
 Syntax theme for the NC programing languages Klartext (used on HEIDENHAIN TNC controls) an g-code (aka DIN/ISO)
 
-![Screenshot](screenshot.png?raw=true "Screenshot")
+![Screenshot](_img/screenshot.png?raw=true "Screenshot")
 
 ## Features
 

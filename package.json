@@ -1,15 +1,16 @@
 {
   "name": "language-klartext",
-  "version": "0.4.0",
-  "description": "Syntax theme for the NC programing languages Klartext (used on HEIDENHAIN TNC controls) an g-code (aka DIN/ISO)",
-  "keywords": [
-    "syntax",
-    "theme"
-  ],
+  "version": "0.4.1",
+  "description": "Klartext an G-Code support in Atom",
+  "main": "./lib/nc-code",
   "dependencies": {},
   "readme": "# language-klartext",
   "readmeFilename": "README.md",
+  "homepage": "http://atom.github.io/language-klartext",
   "repository": "https://github.com/drunsinn/language-klartext.git",
+  "bugs": {
+    "url": "https://github.com/atom/language-klartext/issues"
+  },
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"

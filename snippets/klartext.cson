@@ -1,0 +1,19 @@
+'.nc.klartext':
+  'LwithX':
+    'prefix': 'LX'
+    'body': 'L  X$1'
+  'LwithY':
+    'prefix': 'LY'
+    'body': 'L  Y$1'
+  'LwithZ':
+    'prefix': 'LZ'
+    'body': 'L  Z$1'
+  'LwithXY':
+    'prefix': 'LX'
+    'body': 'L  X$1 Y$2'
+  'Lable':
+    'prefix': 'LBL'
+    'body': 'LBL $1'
+  'Lable Call':
+    'prefix': 'CALL LBL'
+    'body': 'CALL LBL $1'

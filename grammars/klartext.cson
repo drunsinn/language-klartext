@@ -3,8 +3,8 @@
   'H'
 ]
 'firstLineMatch': '^(\\d+) +(BEGIN PGM) (.*\\.H) (MM|INCH) ?$'
-'name': 'klartext'
-'scopeName' : 'source.klartext';
+'name': 'Klartext'
+'scopeName': 'text.nc-code.klartext';
 'patterns': [
     {
         'comment': 'line number'
@@ -44,7 +44,7 @@
         'match': '\\b(BLK FORM) (0.[12])( [XYZ] )?'
         'captures':
             '1':
-                'name': 'base.constant'
+                'name': 'base.keyword'
             '2':
                 'name': 'base.constant'
             '3':
@@ -55,7 +55,7 @@
         'match': '\\b(BLK FORM CYLINDER) ([XYZ]) (R)(\\d+) (L)(\\d+)( DIST)((\\+|-)\\d+)?( RI)(\\d+)?'
         'captures':
             '1':
-                'name': 'base.constant'
+                'name': 'base.keyword'
             '2':
                 'name': 'base.variable'
             '3':
@@ -63,17 +63,17 @@
             '4':
                 'name': 'base.variable'
             '5':
-                'name': 'base.constant'
+                'name': 'base.keyword'
             '6':
                 'name': 'base.variable'
             '7':
-                'name': 'base.constant'
+                'name': 'base.keyword'
             '8':
                 'name': 'base.variable'
             '9':
                 'name': 'base.variable'
             '10':
-                'name': 'base.constant'
+                'name': 'base.keyword'
             '11':
                 'name': 'base.variable'
     },
@@ -82,7 +82,7 @@
         'match': '\\b(BLK FORM ROTATION) ([XYZ]) (DIM_[DR])'
         'captures':
             '1':
-                'name': 'base.constant'
+                'name': 'base.keyword'
             '2':
                 'name': 'base.variable'
             '3':
@@ -138,7 +138,7 @@
         'match': '\\b(M)(\\d+)\\b'
         'captures':
             '1':
-                'name': 'base.entity.name.section'
+                'name': 'base.keyword'
             '2':
                 'name': 'base.variable'
     },
@@ -163,7 +163,7 @@
     {
         'comment': 'linear and circular motion'
         'match': '\\b(L[P]?|C[CPR]?|CT[P]?)\\b'
-        'name': 'base.entity.name.section'
+        'name': 'base.keyword'
     },
     {
         'comment': 'contour parts'
@@ -181,7 +181,7 @@
         'match': '\\b(CALL LBL )((\\"\\w+\\")|(\\d+)|(Q[LSR]*[0-9]+))(\\sREP((\\d+)|(Q[LR]*[0-9]+)))?'
         'captures':
             '1':
-                'name': 'base.entity.name.section'
+                'name': 'base.keyword'
             '2':
                 'name': 'base.constant'
             '3':
@@ -213,7 +213,7 @@
         'match': '\\b(CALL PGM) (.*)'
         'captures':
             '1':
-                'name': 'base.entity.name.section'
+                'name': 'base.keyword'
             '2':
                 'name': 'base.variable'
     },
@@ -222,7 +222,7 @@
         'match': '\\b(TOOL DEF) (.*)'
         'captures':
             '1':
-                'name': 'base.entity.name.section'
+                'name': 'base.constant'
             '2':
                 'name': 'base.variable'
             '3':
@@ -233,7 +233,7 @@
         'match': '\\b(TOOL CALL) (\\d+(\\.\\d+)?|\\"\\w+\\")( [XYZ]+)?'
         'captures':
             '1':
-                'name': 'base.entity.name.section'
+                'name': 'base.keyword'
             '2':
                 'name': 'base.variable'
             '3':
@@ -279,19 +279,19 @@
     {
         'comment': 'cycle call'
         'match': '\\b(CYCL CALL( POS| PAT)?)'
-        'name': 'base.constant'
+        'name': 'base.keyword'
     },
     {
         'comment': 'program stop'
         'match': '\\b(STOP)'
-        'name': 'base.entity.name.section'
+        'name': 'base.keyword'
     },
     {
         'comment': 'special functions - TCPM'
         'match': '\\b(FUNCTION)( RESET)?( TCPM)( F (CONT|TCP) AXIS (POS|SPAT) PATHCTRL (AXIS|VECTOR))?'
         'captures':
             '1':
-                'name': 'base.entity.name.section'
+                'name': 'base.constant'
             '2':
                 'name': 'base.variable'
             '3':
@@ -301,17 +301,26 @@
     },
     {
         'comment': 'special functions - PLANE'
+        #SPA+0 SPB+0 SPC+0 TURN FMAX SEQ+ TABLE ROT
         'match': '\\b(PLANE) (RESET|SPATIAL|PROJECTED|EULER|VECTOR|POINTS|RELATIV|AXIAL)?( MOVE DIST(\\d+))?'
         'captures':
             '1':
-                'name': 'base.entity.name.section'
+                'name': 'base.keyword'
             '2':
                 'name': 'base.constant'
             '3':
                 'name': 'base.variable'
             '4':
                 'name': 'base.constant'
-    },
+            '5':
+                'name': 'base.constant'
+            '6':
+                'name': 'base.constant'
+            '7':
+                'name': 'base.constant'
+            '8':
+                'name': 'base.constant'    },
+
     {
         'comment': 'keywords for FN functions'
         'match': '\\b(FN )(\\d{1,2})(: )(IF|ERROR|F-PRINT|SYSREAD|PLC|WAIT FOR|EXPORT|TABOPEN|TABWRITE|TABREAD)?\\b'
@@ -321,7 +330,7 @@
             '2':
                 'name': 'base.variable'
             '3':
-                'name': 'base.constant'
+                'name': 'base.none'
             '4':
                 'name': 'base.variable'
     },
@@ -339,5 +348,14 @@
         'comment': 'keywords for FN functions'
         'match': '\\b(DIV|EQU|COS|SIN|TAN|LT|GT|GOTO)'
         'name': 'base.constant'
+    },
+    {
+        'comment': 'keywords for FN functions'
+        'match': '\\b(ID|NR|IDX)(\\d+)'
+        'captures':
+            '1':
+                'name': 'base.constant'
+            '2':
+                'name': 'base.variable'
     },
 ]

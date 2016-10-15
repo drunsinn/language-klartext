@@ -1,0 +1,10 @@
+'menu': [
+  'label': 'Packages'
+  'submenu': [
+    'label': 'Klartext/G-Code'
+    'submenu': [
+      { 'label': 'Remove Line Numbers', 'command': 'nc-code:remove_numbers' }
+      { 'label': 'Renumber Lines', 'command': 'nc-code:renumber' }
+    ]
+  ]
+]
