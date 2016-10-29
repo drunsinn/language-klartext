@@ -1,3 +1,7 @@
+## 0.4.1 - snippets and code functions
+* Added simple snippets for G-Code and Klartext
+* Added function to remove line numbers
+
 ## 0.2.0 - Start of g-code support
 * Added syntax highlighting for the following commands:
 *  - G-Code:
