@@ -1,6 +1,6 @@
 {
   "name": "language-klartext",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Klartext an G-Code support in Atom",
   "main": "./lib/nc-code",
   "dependencies": {},
