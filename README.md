@@ -17,4 +17,4 @@ Syntax theme for the NC programing languages Klartext (used on HEIDENHAIN TNC co
 See [CHANGELOG.md](CHANGELOG.md)
 
 # License
-MIT license, see [LICENSE.md](LICENSE.md).
+MIT license, see [LICENSE.md](LICENSE.md)

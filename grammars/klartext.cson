@@ -267,12 +267,23 @@ patterns: [
     },
     {
       comment: 'distance value'
-      match: '\\b(DIST)(\\d+)'
+      match: '\\b(DIST)(\\d+(?:\\.\\d)?)'
       captures:
         1:
           name: 'keyword.operator.klartext'
         2:
           name: 'constant.numerical.klartext'
+    },
+    {
+      comment: 'move back'
+      match: '\\b(MB)(?:(\\d+)|( MAX))'
+      captures:
+        1:
+          name: 'keyword.operator.klartext'
+        2:
+          name: 'constant.numerical.klartext'
+        3:
+          name: 'constant.string.klartext'
     },
     {
       comment: 'movment blocks'
@@ -354,7 +365,7 @@ patterns: [
     },
     {
       comment: 'cycle definition - old style - continuation'
-      match: '\\b(CYCL DEF) (\\d+\\.[1-9][0-9]*)(?:\\s+([a-zA-Z]{2,})([\\+|-]?\\d+))?'
+      match: '\\b(CYCL DEF) (\\d+\\.[1-9][0-9]*)(?:\\s+([a-zA-Z\\s\\-]{2,})([\\+|-]?\\d+))?'
       captures:
         1:
           name: 'keyword.control.klartext'
@@ -367,7 +378,7 @@ patterns: [
     },
     {
       comment: 'cycle definition - new style'
-      match: '\\b(CYCL DEF) (\\d+) ((?:.*)(?: ~))'
+      match: '\\b(CYCL DEF) (\\d+) ((?:[\\d\\w\\s\\.]*)(?: ~))'
       captures:
         1:
           name: 'keyword.control.klartext'
@@ -377,8 +388,19 @@ patterns: [
           name: 'comment.line.klartext'
     },
     {
-      comment: 'cycle definition - new style - continuation|([\\+|-](?:Q[LR]?\\d+))|( AUTO)|( MAX)'
-      match: '\\s+(?:(Q\\d+)|(QS\\d+))(=)(?:([\\+-]?\\d+(?:\\.\\d+)?)|([\\+-]Q[LR]?\\d+)|( AUTO)|( MAX)|(\\".*\\"))'
+      comment: 'cycle definition - new style - touch probe'
+      match: '\\b(TCH PROBE) (\\d+) ((?:[\\d\\w\\s]*)(?: ~))'
+      captures:
+        1:
+          name: 'keyword.control.klartext'
+        2:
+          name: 'constant.numeric.klartext'
+        3:
+          name: 'comment.line.klartext'
+    },
+    {
+      comment: 'cycle definition - new style - continuation'
+      match: '\\s+(?:(Q\\d+)|(QS\\d+))(=)(?:([\\+-]?\\d+(?:\\.\\d+)?)|([\\+-]Q[LR]?\\d+)|( AUTO)|( MAX)|(\\".*\\")|(?:( FU)([\\+-]\\d+\\.\\d+)))'
       captures:
         1:
           name: 'variable.numeric.klartext' #Q100
@@ -396,6 +418,10 @@ patterns: [
           name: 'constant.string.klartext' #const_str
         8:
           name: 'constant.string.klartext' #str
+        9:
+          name: 'keyword.operator.klartext' #fu
+        10:
+          name: 'constant.numeric.klartext' #fu
     },
     {
       comment: 'cycle call'

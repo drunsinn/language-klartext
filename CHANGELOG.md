@@ -1,3 +1,9 @@
+## 0.5.4 - fixing stuff
+* fixed link for bug reporting
+* fixed missing charackters in cycle names
+* fixed parameter type for cycle definition
+* added move back command
+
 ## 0.5.2 - start of rewrite
 * complete rewrite of grammar
 *  - changed syntax highlighting to more meaningfull styles
