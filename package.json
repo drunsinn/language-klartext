@@ -1,13 +1,16 @@
 {
   "name": "language-klartext",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Klartext an G-Code support in Atom",
-  "main": "./lib/nc-code",
+  "main": "./lib/language-klartext",
   "dependencies": {},
-  "readme": "# language-klartext",
   "readmeFilename": "README.md",
   "homepage": "http://atom.github.io/language-klartext",
   "repository": "https://github.com/drunsinn/language-klartext.git",
+  "keywords": [
+    "syntax",
+    "theme"
+  ],
   "bugs": {
     "url": "https://github.com/atom/language-klartext/issues"
   },

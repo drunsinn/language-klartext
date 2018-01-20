@@ -1,3 +1,10 @@
+## 0.5.2 - start of rewrite
+* complete rewrite of grammar
+*  - changed syntax highlighting to more meaningfull styles
+*  - simplyfied grammar parsing regex
+* fixed errors in library function for line numbers
+* added basic grammar for PNT-files (table with point definition for patterns)
+
 ## 0.4.1 - snippets and code functions
 * Added simple snippets for G-Code and Klartext
 * Added function to remove line numbers
