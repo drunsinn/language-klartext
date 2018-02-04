@@ -5,7 +5,7 @@ fileTypes: [
   'nc'
 ]
 
-firstLineMatch: '^(%|\\(DFS)(.*)(\\*|RWED\\))$'
+# firstLineMatch: '^(%|\\(DFS)(.*)(\\*|RWED\\))$'
 foldingStartMarker: ''
 foldingStopMarker: ''
 limitLineLength: false
@@ -69,7 +69,7 @@ patterns: [
     },
     {
         comment: 'tool call'
-        match: '\\b(T)(\\d*.\\d+)\\b'
+        match: '(T)(\\d*.\\d+)'
         captures:
             1:
                 name: 'keyword.control.g-code'
@@ -78,8 +78,7 @@ patterns: [
     },
     {
       comment: 'g-command'
-      # match: '\\b(G)(\\d+)((?:\\[)((-?\\d+\\.?\\d*),?)*\\])?'
-      match: '\\b(G)(\\d+)\\b'
+      match: '(G)(\\d+)'
       captures:
         1:
           name: 'keyword.control.g-code'
@@ -88,7 +87,7 @@ patterns: [
     },
     {
       comment: 'machine function'
-      match: '\\b(M)(\\d+)\\b'
+      match: '(M)(\\d+)'
       captures:
         1:
           name: 'keyword.operator.g-code'
@@ -97,7 +96,7 @@ patterns: [
     },
     {
       comment: 'feedrate'
-      match: '\\b(F)(\\d+)\\b'
+      match: '(F)(\\d+)'
       captures:
         1:
           name: 'keyword.operator.g-code'
@@ -106,7 +105,25 @@ patterns: [
     },
     {
       comment: 'spindle speed'
-      match: '\\b(S)(\\d+)\\b'
+      match: '(S)(\\d+)'
+      captures:
+        1:
+          name: 'keyword.operator.g-code'
+        2:
+          name: 'constant.numeric.g-code'
+    },
+    {
+      comment: 'dwell time'
+      match: '(P)(\\d+)'
+      captures:
+        1:
+          name: 'keyword.operator.g-code'
+        2:
+          name: 'constant.numeric.g-code'
+    },
+    {
+      comment: 'radius value'
+      match: '(R)(\\d+)'
       captures:
         1:
           name: 'keyword.operator.g-code'
@@ -115,11 +132,20 @@ patterns: [
     },
     {
       comment: 'cartesian coordinate'
-      match: '\\b([XYZ])([\\+-]\\d+(?:\\.\\d+)?)\\b'
+      match: '([XYZ])([\\+-]?\\d+(?:\\.\\d+)?)'
       captures:
         1:
           name: 'keyword.operator.g-code'
         2:
           name: 'constant.numeric.g-code'
-    }
+    },
+    {
+      comment: 'circle center offset'
+      match: '([IJK])([\\+-]?\\d+(?:\\.\\d+)?)'
+      captures:
+        1:
+          name: 'keyword.operator.g-code'
+        2:
+          name: 'constant.numeric.g-code'
+    },
 ]
