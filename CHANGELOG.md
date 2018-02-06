@@ -1,3 +1,8 @@
+## 0.6.0 - mostly house keeping
+* refactoring and code cleanup of javascript functions
+* more g-code parameters and code folding for units
+* more file types for g-code: Siemens mpf and spf, CNCpilot ncs
+
 ## 0.5.4 - fixing stuff
 * fixed link for bug reporting
 * fixed missing charackters in cycle names

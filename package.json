@@ -9,7 +9,10 @@
   "repository": "https://github.com/drunsinn/language-klartext.git",
   "keywords": [
     "syntax",
-    "theme"
+    "theme",
+    "Klartext",
+    "G-Code",
+    "line numbers"
   ],
   "bugs": {
     "url": "https://github.com/drunsinn/language-klartext/issues"
