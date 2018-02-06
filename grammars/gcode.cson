@@ -1,13 +1,14 @@
 scopeName : 'source.g-code';
 name: 'G-Code'
 fileTypes: [
-  'i'
-  'nc'
+  'i', # generic nc program
+  'nc', # generic nc program
+  'mpf', # sinumerik main program
+  'spf', # sinumerik sub programm
 ]
 
-# firstLineMatch: '^(%|\\(DFS)(.*)(\\*|RWED\\))$'
-foldingStartMarker: ''
-foldingStopMarker: ''
+foldingStartMarker: 'UNIT'
+foldingStopMarker: 'END_OF_UNIT'
 limitLineLength: false
 
 patterns: [
@@ -31,28 +32,28 @@ patterns: [
         match: '^(/N\\d+)\\s+(.*)$'
         name: 'comment.block.g-code'
     },
-    {
-        comment: 'program head'
-        match: '(\\(DFS,)(.*)(,RWED\\))$'
-        captures:
-            1:
-                name: 'base.constant'
-            2:
-                name: 'base.string'
-            3:
-                name: 'base.constant'
-    },
-    {
-        comment: 'message output'
-        match: '(\\(\\*MSG,)(.*)(\\))$'
-        captures:
-            1:
-                name: 'base.constant'
-            2:
-                name: 'base.string'
-            3:
-                name: 'base.constant'
-    },
+    # {
+    #     comment: 'program head'
+    #     match: '(\\(DFS,)(.*)(,RWED\\))$'
+    #     captures:
+    #         1:
+    #             name: 'base.constant'
+    #         2:
+    #             name: 'base.string'
+    #         3:
+    #             name: 'base.constant'
+    # },
+    # {
+    #     comment: 'message output'
+    #     match: '(\\(MSG)(\\".*\\")(\\))'
+    #     captures:
+    #         1:
+    #             name: 'base.constant'
+    #         2:
+    #             name: 'base.string'
+    #         3:
+    #             name: 'base.constant'
+    # },
     {
         comment: 'line termination'
         match: '\\*$'
@@ -60,25 +61,31 @@ patterns: [
     },
     {
         comment: 'program name'
-        match: '(%)([\\w\\d_]+)'
-        captures:
-            1:
-                name: 'base.constant'
-            2:
-                name: 'base.string'
-    },
-    {
-        comment: 'tool call'
-        match: '(T)(\\d*.\\d+)'
+        match: '(%)([\\w\\d_]+(?:\\.nc)?)(\\s+\\".*\\")?'
         captures:
             1:
                 name: 'keyword.control.g-code'
             2:
+                name: 'variable.string.g-code'
+            3:
+                name: 'constant.string.g-code'
+    },
+    {
+        comment: 'tool call'
+        match: '\\b(T)(?:(=)(\\".*\\"))|(\\d+(?:\\.\\d+)?)\\b'
+        captures:
+            1:
+                name: 'keyword.control.g-code'
+            2:
+                name: 'keyword.control.g-code'
+            3:
+                name: 'constant.string.g-code'
+            4:
                 name: 'constant.numeric.g-code'
     },
     {
-      comment: 'g-command'
-      match: '(G)(\\d+)'
+      comment: 'Ingeger Values: g-command'
+      match: '\\b(G)(\\d+)\\b'
       captures:
         1:
           name: 'keyword.control.g-code'
@@ -86,8 +93,8 @@ patterns: [
           name: 'constant.numeric.g-code'
     },
     {
-      comment: 'machine function'
-      match: '(M)(\\d+)'
+      comment: 'Ingeger Values: machin function, spindle speed, radius, l, p'
+      match: '\\b([GMSRLPQHVDWC])(\\d+)\\b'
       captures:
         1:
           name: 'keyword.operator.g-code'
@@ -95,8 +102,8 @@ patterns: [
           name: 'constant.numeric.g-code'
     },
     {
-      comment: 'feedrate'
-      match: '(F)(\\d+)'
+      comment: 'Float Values: feed rate'
+      match: '\\b([FB])(\\d+(?:\\.\\d+)?)\\b'
       captures:
         1:
           name: 'keyword.operator.g-code'
@@ -104,26 +111,8 @@ patterns: [
           name: 'constant.numeric.g-code'
     },
     {
-      comment: 'spindle speed'
-      match: '(S)(\\d+)'
-      captures:
-        1:
-          name: 'keyword.operator.g-code'
-        2:
-          name: 'constant.numeric.g-code'
-    },
-    {
-      comment: 'dwell time'
-      match: '(P)(\\d+)'
-      captures:
-        1:
-          name: 'keyword.operator.g-code'
-        2:
-          name: 'constant.numeric.g-code'
-    },
-    {
-      comment: 'radius value'
-      match: '(R)(\\d+)'
+      comment: 'Signed Float Values:'
+      match: '\\b([P])([\\+-]?\\d+(?:\\.\\d+)?)\\b'
       captures:
         1:
           name: 'keyword.operator.g-code'
@@ -132,7 +121,7 @@ patterns: [
     },
     {
       comment: 'cartesian coordinate'
-      match: '([XYZ])([\\+-]?\\d+(?:\\.\\d+)?)'
+      match: '\\b([XYZ])([\\+-]?\\d+(?:\\.\\d+)?)\\b'
       captures:
         1:
           name: 'keyword.operator.g-code'
@@ -141,7 +130,7 @@ patterns: [
     },
     {
       comment: 'circle center offset'
-      match: '([IJK])([\\+-]?\\d+(?:\\.\\d+)?)'
+      match: '\\b([IJK])([\\+-]?\\d+(?:\\.\\d+)?)\\b'
       captures:
         1:
           name: 'keyword.operator.g-code'
