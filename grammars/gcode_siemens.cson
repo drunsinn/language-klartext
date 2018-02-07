@@ -1,8 +1,8 @@
-scopeName : 'source.g-code';
-name: 'G-Code'
+scopeName : 'source.g-code.siemens';
+name: 'G-Code - Siemens'
 fileTypes: [
-  'i', # generic nc program
-  'nc', # generic nc program
+  'mpf', # sinumerik main program
+  'spf', # sinumerik sub programm
 ]
 
 foldingStartMarker: 'UNIT'
@@ -117,5 +117,33 @@ patterns: [
           name: 'keyword.operator.g-code'
         2:
           name: 'constant.numeric.g-code'
+    },
+    {
+      comment: 'Keywords: groups'
+      match: '\\b((?:UNIT)|(?:END_OF_UNIT))\\b'
+      captures:
+        1:
+          name: 'keyword.control.g-code'
+    },
+    {
+      comment: 'Keywords: GLOBAL'
+      match: '\\b((?:ENDE)|(?:RETURN))\\b'
+      captures:
+        1:
+          name: 'keyword.control.g-code'
+    },
+    {
+      comment: 'Keywords: Flow control - Part1'
+      match: '\\b((?:IF)|(?:THEN)|(?:ELSE)|(?:ENDIF)|(?:WHILE)|(?:ENDWHILE)|(?:FOR)|(?:TO)|(?:bENDFOR))\\b'
+      captures:
+        1:
+          name: 'keyword.control.g-code'
+    },
+    {
+      comment: 'Keywords: Flow control - Part2'
+      match: '\\b((?:SWITCH)|(?:CASE)|(?:ENDSWITCH)|(?:BREAK)|(?:DEFAULT))\\b'
+      captures:
+        1:
+          name: 'keyword.control.g-code'
     },
 ]
