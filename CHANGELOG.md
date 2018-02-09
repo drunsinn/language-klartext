@@ -1,3 +1,7 @@
+## 0.6.2 - split g-code grammars
+* split g-code grammars into different file
+* inspect first line of g-code file to decide which dialect to use
+
 ## 0.6.0 - mostly house keeping
 * refactoring and code cleanup of javascript functions
 * more g-code parameters and code folding for units

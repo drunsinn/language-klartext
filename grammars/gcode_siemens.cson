@@ -5,15 +5,45 @@ fileTypes: [
   'spf', # sinumerik sub programm
 ]
 
-foldingStartMarker: 'UNIT'
-foldingStopMarker: 'END_OF_UNIT'
-limitLineLength: false
-
 patterns: [
+    {
+      comment: 'program name'
+      match: '(%)([\\w\\d_]+MPF)?'
+      captures:
+        1:
+          name: 'keyword.control.g-code'
+        2:
+          name: 'variable.string.g-code'
+    },
     {
       comment: 'line number'
       match: '^N\\s*\\d+'
       name: 'comment.line.g-code'
+    },
+    {
+      comment: 'function block'
+      name: 'keyword.control.g-code'
+      contentName: 'keyword.operator.g-code';
+      begin: '((?:POCKET\\d)|(?:HOLES\\d)|(?:CYCLE\\d+))\\('
+      end: '\\)'
+      patterns: [
+        {
+          match: '(([\\+-]?\\d+(?:\\.\\d)?)?)(\\,)?'
+          captures:
+            1:
+              name: 'constant.numeric.g-code'
+        },
+      ]
+    },
+    {
+      comment: 'function block'
+      name: 'keyword.control.g-code'
+      contentName: 'keyword.operator.g-code';
+      begin: '((?:WRITE)|(?:DELETE)|(?:MSG))\\('
+      end: '\\)'
+      patterns: [
+        {include: '$self'},
+      ]
     },
     {
       comment: 'comment until the end of the line'
@@ -21,51 +51,12 @@ patterns: [
       name: 'comment.line.g-code'
     },
     {
-      comment: 'comment'
-      match: '(\\(.*\\))$'
-      name: 'comment.line.g-code'
+      comment: 'string in double quotes'
+      match: '"[\\w\\s#-]*"'
+      name: 'variable.string.g-code'
     },
     {
-        comment: 'commented out line'
-        match: '^(/N\\d+)\\s+(.*)$'
-        name: 'comment.block.g-code'
-    },
-    {
-        comment: 'program meta info'
-        match: '^#(.*)$'
-        name: 'comment.block.g-code'
-    },
-    {
-        comment: 'line termination'
-        match: '\\*$'
-        name: 'comment.line.g-code'
-    },
-    {
-        comment: 'program name'
-        match: '(%)([\\w\\d_]+(?:(?:\\.nc)|(?:\\.NCS))?)(\\s+\\".*\\")?'
-        captures:
-            1:
-                name: 'keyword.control.g-code'
-            2:
-                name: 'variable.string.g-code'
-            3:
-                name: 'constant.string.g-code'
-    },
-    {
-        comment: 'tool call'
-        match: '\\b(T)(?:(=)(\\".*\\"))|(\\d+(?:\\.\\d+)?)\\b'
-        captures:
-            1:
-                name: 'keyword.control.g-code'
-            2:
-                name: 'keyword.control.g-code'
-            3:
-                name: 'constant.string.g-code'
-            4:
-                name: 'constant.numeric.g-code'
-    },
-    {
-      comment: 'Ingeger Values: g-command'
+      comment: 'G-Command'
       match: '\\b(G)(\\d+)\\b'
       captures:
         1:
@@ -74,76 +65,79 @@ patterns: [
           name: 'constant.numeric.g-code'
     },
     {
-      comment: 'Ingeger Values: machin function, spindle speed, radius, l, p'
-      match: '\\b([GMSRLPQHVDWC])(\\d+)\\b'
-      captures:
-        1:
-          name: 'keyword.operator.g-code'
-        2:
-          name: 'constant.numeric.g-code'
-    },
-    {
-      comment: 'Float Values: feed rate'
-      match: '\\b([FB])(\\d+(?:\\.\\d+)?)\\b'
-      captures:
-        1:
-          name: 'keyword.operator.g-code'
-        2:
-          name: 'constant.numeric.g-code'
-    },
-    {
-      comment: 'Signed Float Values:'
-      match: '\\b([P])([\\+-]?\\d+(?:\\.\\d+)?)\\b'
-      captures:
-        1:
-          name: 'keyword.operator.g-code'
-        2:
-          name: 'constant.numeric.g-code'
-    },
-    {
-      comment: 'cartesian coordinate'
-      match: '\\b([XYZ])([\\+-]?\\d+(?:\\.\\d+)?)\\b'
-      captures:
-        1:
-          name: 'keyword.operator.g-code'
-        2:
-          name: 'constant.numeric.g-code'
-    },
-    {
-      comment: 'circle center offset'
-      match: '\\b([IJK])([\\+-]?\\d+(?:\\.\\d+)?)\\b'
-      captures:
-        1:
-          name: 'keyword.operator.g-code'
-        2:
-          name: 'constant.numeric.g-code'
-    },
-    {
-      comment: 'Keywords: groups'
-      match: '\\b((?:UNIT)|(?:END_OF_UNIT))\\b'
+      comment: 'Machine Function'
+      match: '\\b(M)(\\d+)\\b'
       captures:
         1:
           name: 'keyword.control.g-code'
+        2:
+          name: 'constant.numeric.g-code'
     },
     {
-      comment: 'Keywords: GLOBAL'
-      match: '\\b((?:ENDE)|(?:RETURN))\\b'
+      comment: 'Tool call'
+      match: '\\b(T)(\\d+)\\b'
       captures:
         1:
           name: 'keyword.control.g-code'
+        2:
+          name: 'constant.numeric.g-code'
     },
     {
-      comment: 'Keywords: Flow control - Part1'
-      match: '\\b((?:IF)|(?:THEN)|(?:ELSE)|(?:ENDIF)|(?:WHILE)|(?:ENDWHILE)|(?:FOR)|(?:TO)|(?:bENDFOR))\\b'
+      comment: 'axis values'
+      match: '\\b([ABCIJKXYZ])([\\+-]?\\d+(?:\\.\\d+)?)\\b'
       captures:
         1:
-          name: 'keyword.control.g-code'
+          name: 'keyword.operator.g-code'
+        2:
+          name: 'constant.numeric.g-code'
     },
     {
-      comment: 'Keywords: Flow control - Part2'
-      match: '\\b((?:SWITCH)|(?:CASE)|(?:ENDSWITCH)|(?:BREAK)|(?:DEFAULT))\\b'
+      comment: 'Spindle speed'
+      match: '\\b(S)(\\d+)\\b'
       captures:
         1:
-          name: 'keyword.control.g-code'
+          name: 'keyword.operator.g-code'
+        2:
+          name: 'constant.numeric.g-code'
+    },
+    {
+      comment: 'feed rate'
+      match: '\\b(F)(\\d+(?:\\.\\d+)?)\\b'
+      captures:
+        1:
+          name: 'keyword.operator.g-code'
+        2:
+          name: 'constant.numeric.g-code'
+    },
+    {
+      comment: 'Keywords: Flow control - If'
+      match: '\\b((?:IF)|(?:OR)|(?:AND)|(?:ELSE)|(?:ENDIF))\\b'
+      name: 'keyword.control.g-code'
+    },
+    {
+      comment: 'Keywords: Flow control - Loop'
+      match: '\\b((?:WHILE)|(?:ENDWHILE)|(?:FOR)|(?:TO)|(?:ENDFOR))\\b'
+      name: 'keyword.control.g-code'
+    },
+    {
+      comment: 'Keywords: Variable Definition'
+      match: '\\b(DEF (?:(?:INT)|(?:REAL)|(?:BOOL)|(?:CHAR)|(?:STRING)))\\b'
+      name: 'keyword.control.g-code'
+    },
+    {
+      comment: 'System or User Variable - Array'
+      match: '(?<!\\w)([_\\$]{1}[A-Z_]+\\[)([_0-9A-Z ]+)(\\])'
+      captures:
+        1:
+          name: 'keyword.variable.g-code'
+        2:
+          name: 'constant.numeric.g-code'
+        3:
+          name: 'keyword.variable.g-code'
+    },
+    {
+      comment: 'System or User Variable'
+      match: '([_\\$]{1}[A-Z_]+)'
+      name: 'keyword.variable.g-code'
     },
 ]

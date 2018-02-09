@@ -1,13 +1,11 @@
-scopeName : 'source.g-code';
-name: 'G-Code'
+scopeName : 'source.g-code.generic';
+name: 'G-Code - Generic'
 fileTypes: [
   'i', # generic nc program
   'nc', # generic nc program
 ]
 
-foldingStartMarker: 'UNIT'
-foldingStopMarker: 'END_OF_UNIT'
-limitLineLength: false
+firstLineMatch: '^[^%]';
 
 patterns: [
     {
@@ -16,56 +14,12 @@ patterns: [
       name: 'comment.line.g-code'
     },
     {
-      comment: 'comment until the end of the line'
-      match: ';(.*)$'
-      name: 'comment.line.g-code'
-    },
-    {
       comment: 'comment'
       match: '(\\(.*\\))$'
       name: 'comment.line.g-code'
     },
     {
-        comment: 'commented out line'
-        match: '^(/N\\d+)\\s+(.*)$'
-        name: 'comment.block.g-code'
-    },
-    {
-        comment: 'program meta info'
-        match: '^#(.*)$'
-        name: 'comment.block.g-code'
-    },
-    {
-        comment: 'line termination'
-        match: '\\*$'
-        name: 'comment.line.g-code'
-    },
-    {
-        comment: 'program name'
-        match: '(%)([\\w\\d_]+(?:(?:\\.nc)|(?:\\.NCS))?)(\\s+\\".*\\")?'
-        captures:
-            1:
-                name: 'keyword.control.g-code'
-            2:
-                name: 'variable.string.g-code'
-            3:
-                name: 'constant.string.g-code'
-    },
-    {
-        comment: 'tool call'
-        match: '\\b(T)(?:(=)(\\".*\\"))|(\\d+(?:\\.\\d+)?)\\b'
-        captures:
-            1:
-                name: 'keyword.control.g-code'
-            2:
-                name: 'keyword.control.g-code'
-            3:
-                name: 'constant.string.g-code'
-            4:
-                name: 'constant.numeric.g-code'
-    },
-    {
-      comment: 'Ingeger Values: g-command'
+      comment: 'G-Command'
       match: '\\b(G)(\\d+)\\b'
       captures:
         1:
@@ -74,8 +28,26 @@ patterns: [
           name: 'constant.numeric.g-code'
     },
     {
-      comment: 'Ingeger Values: machin function, spindle speed, radius, l, p'
-      match: '\\b([GMSRLPQHVDWC])(\\d+)\\b'
+      comment: 'Machine Function'
+      match: '\\b(M)(\\d+)\\b'
+      captures:
+        1:
+          name: 'keyword.control.g-code'
+        2:
+          name: 'constant.numeric.g-code'
+    },
+    {
+      comment: 'Tool call'
+      match: '\\b(T)(\\d+)\\b'
+      captures:
+        1:
+          name: 'keyword.control.g-code'
+        2:
+          name: 'constant.numeric.g-code'
+    },
+    {
+      comment: 'axis values'
+      match: '\\b([ABCIJKXYZ])([\\+-]?\\d+(?:\\.\\d+)?)\\b'
       captures:
         1:
           name: 'keyword.operator.g-code'
@@ -83,8 +55,8 @@ patterns: [
           name: 'constant.numeric.g-code'
     },
     {
-      comment: 'Float Values: feed rate'
-      match: '\\b([FB])(\\d+(?:\\.\\d+)?)\\b'
+      comment: 'Spindle speed'
+      match: '\\b(S)(\\d+)\\b'
       captures:
         1:
           name: 'keyword.operator.g-code'
@@ -92,26 +64,8 @@ patterns: [
           name: 'constant.numeric.g-code'
     },
     {
-      comment: 'Signed Float Values:'
-      match: '\\b([P])([\\+-]?\\d+(?:\\.\\d+)?)\\b'
-      captures:
-        1:
-          name: 'keyword.operator.g-code'
-        2:
-          name: 'constant.numeric.g-code'
-    },
-    {
-      comment: 'cartesian coordinate'
-      match: '\\b([XYZ])([\\+-]?\\d+(?:\\.\\d+)?)\\b'
-      captures:
-        1:
-          name: 'keyword.operator.g-code'
-        2:
-          name: 'constant.numeric.g-code'
-    },
-    {
-      comment: 'circle center offset'
-      match: '\\b([IJK])([\\+-]?\\d+(?:\\.\\d+)?)\\b'
+      comment: 'feed rate'
+      match: '\\b(F)(\\d+(?:\\.\\d+)?)\\b'
       captures:
         1:
           name: 'keyword.operator.g-code'

@@ -2,8 +2,10 @@
 
 Syntax theme for the NC programing languages Klartext (used on HEIDENHAIN TNC controls) an G-Code (aka DIN/ISO) in different dialects.
 
-Klartext filetypes: *.H
-G-Code filetypes: *.i, *.nc, *.mpf, *.spf
+Klartext filetypes: .H
+G-Code - Generic: .i, .nc
+G-Code - CNCpilot and ManualPlus: .i, .nc
+G-Code - Siemens: .mpf, .spf
 
 ![Screenshot](_img/screenshot.png?raw=true "Screenshot")
 
@@ -14,7 +16,8 @@ G-Code filetypes: *.i, *.nc, *.mpf, *.spf
 * correct format of numbers (from 1,234 to 1.234)
 
 ## Settings
-- None so far
+- Numbering Increment for G-Code
+lets you decide by which amount the line-numbers should be incremented
 
 # Changelog
 See [CHANGELOG.md](CHANGELOG.md)
