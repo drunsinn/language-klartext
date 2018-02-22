@@ -23,7 +23,7 @@ patterns: [
     {
       comment: 'function block'
       name: 'keyword.control.g-code'
-      contentName: 'keyword.operator.g-code';
+      contentName: 'keyword.operator.g-code'
       begin: '((?:POCKET\\d)|(?:HOLES\\d)|(?:CYCLE\\d+))\\('
       end: '\\)'
       patterns: [

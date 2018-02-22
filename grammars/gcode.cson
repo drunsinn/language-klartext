@@ -3,6 +3,7 @@ name: 'G-Code - Generic'
 fileTypes: [
   'i', # generic nc program
   'nc', # generic nc program
+  'gcode',
 ]
 
 firstLineMatch: '^[^%]';
