@@ -17,7 +17,7 @@ G-Code - Siemens: .mpf, .spf
 
 ## Settings
 - Numbering Increment for G-Code
-lets you decide by which amount the line-numbers should be incremented
+Adjust increment for line numbers in nc code
 
 # Changelog
 See [CHANGELOG.md](CHANGELOG.md)

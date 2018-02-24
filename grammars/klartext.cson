@@ -10,538 +10,537 @@ foldingStopMarker: ''
 limitLineLength: false
 
 patterns: [
-    {
-      comment: 'program head and foot'
-      match: '\\b((?:BEGIN|END) PGM) (.*?)\\b(MM|INCH) ?$'
-      captures:
-        1:
-          name: 'keyword.other.klartext'
-        2:
-          name: 'comment.klartext'
-        3:
-          name: 'constant.string.klartext'
-    },
-    {
-      comment: 'line number'
-      match: '^(\\d+)'
-      name: 'comment.line.klartext'
-    },
-    {
-      comment: 'block form cuboid'
-      match: '\\b(BLK FORM) (0.[12]) ([XYZ])?'
-      captures:
-        1:
-          name: 'keyword.control.klartext'
-        2:
-          name: 'constant.numeric.klartext'
-        3:
-          name: 'constant.string.klartext'
-    },
-    {
-      comment: 'block form cylinder'
-      match: '\\b(BLK FORM CYLINDER) ([XYZ])(?: (R|D)(\\d+))(?: (L)(\\d+))(?: (DIST)([\\+-]\\d+))?(?: (DI)(\\d+))?'
-      captures:
-        1:
-          name: 'keyword.control.klartext'
-        2:
-          name: 'constant.string.klartext'
-        3:
-          name: 'keyword.operator.klartext'
-        4:
-          name: 'constant.numeric.klartext'
-        5:
-          name: 'keyword.operator.klartext'
-        6:
-          name: 'constant.numeric.klartext'
-        7:
-          name: 'keyword.operator.klartext'
-        8:
-          name: 'constant.numeric.klartext'
-        9:
-          name: 'keyword.operator.klartext'
-        10:
-          name: 'constant.numeric.klartext'
-    },
-    {
-      comment: 'block form rotational body'
-      match: '\\b(BLK FORM ROTATION) ([XYZ]) (DIM_)([DR]) (?:(\\".*\\")|(\\d+))'
-      captures:
-        1:
-          name: 'keyword.control.klartext'
-        2:
-          name: 'constant.string.klartext'
-        3:
-          name: 'keyword.operator.klartext'
-        4:
-          name: 'constant.string.klartext'
-        5:
-          name: 'constant.string.klartext'
-        6:
-          name: 'constant.numeric.klartext'
-    },
-    {
-      comment: 'comment until the end of the line'
-      match: ';(.*)$'
-      name: 'comment.line.klartext'
-    },
-    {
-      comment: 'outline block'
-      match: '\\* - (.*)$'
-      name: 'comment.block.klartext'
-    },
-    {
-      comment: 'string between double quotes'
-      match: '"(.*)"'
-      name: 'constant.string.quoted.klartext'
-    },
-    {
-      comment: 'cartesian coordinate with number or Q-parameter'
-      match: '\\b(I?[XYZ])(?:([\\+-]\\d+(?:\\.\\d+)?)|([\\+-]Q[LR]?\\d+))\\b'
-      captures:
-        1:
-          name: 'keyword.operator.klartext'
-        2:
-          name: 'constant.numeric.klartext'
-        3:
-          name: 'variable.numeric.klartext'
-    },
-    {
-      comment: 'angular coordinate with number or Q-parameter'
-      match: '\\b(I?[ABC])(?:([\\+-]\\d+(?:\\.\\d+)?)|([\\+-]Q[LR]?\\d+))\\b'
-      captures:
-        1:
-          name: 'keyword.operator.klartext'
-        2:
-          name: 'constant.numeric.klartext'
-        3:
-          name: 'variable.numeric.klartext'
-    },
-    {
-      comment: 'spacial angular coordinate'
-      match: '\\b(SP[ABC])([\\+-]\\d+(?:\\.\\d+)?)\\b'
-      captures:
-        1:
-          name: 'keyword.operator.klartext'
-        2:
-          name: 'constant.numeric.klartext'
-    },
-    {
-      comment: 'polar coordinate with number or Q-parameter'
-      match: '\\b(I?P[AR])(?:([\\+-]\\d+(?:\\.\\d+)?)|([\\+-]Q[LR]?\\d+))\\b'
-      captures:
-        1:
-          name: 'keyword.operator.klartext'
-        2:
-          name: 'constant.numeric.klartext'
-        3:
-          name: 'variable.numeric.klartext'
-    },
-    {
-      comment: 'angular coordinate with number or Q-parameter'
-      match: '\\b(CC[XY])(?:([\\+-]\\d+(?:\\.\\d+)?)|([\\+-]Q[LR]?\\d+))\\b'
-      captures:
-        1:
-          name: 'keyword.operator.klartext'
-        2:
-          name: 'constant.numeric.klartext'
-        3:
-          name: 'variable.numeric.klartext'
-    },
-    {
-      comment: 'Q-parameter (regular, lokal and remanent)'
-      match: '\\b(Q[LR]?[0-9]+)\\b(?!=)'
-      name: 'variable.numeric.klartext'
-    },
-    {
-      comment: 'Q-parameter (string)'
-      match: '\\b(QS[0-9]+)\\b(?!=)'
-      name: 'variable.string.klartext'
-    },
-    {
-      comment: 'arithmetic operators'
-      match: '\\s(\\+|-)\\s'
-      name: 'keyword.operator.arithmetic.klartext'
-    },
-    {
-      comment: 'assignment operators'
-      match: '\\s=\\s'
-      name: 'keyword.operator.assignment.klartext'
-    },
-    {
-      comment: 'feedrate with number or Q-parameter'
-      match: '\\b(F)(?:(MAX)|(\\d+(?:\\.\\d+)?)|(Q[LR]?\\d+)|( AUTO))\\b'
-      captures:
-        1:
-          name: 'keyword.operator.klartext'
-        2:
-          name: 'constant.string.klartext'
-        3:
-          name: 'constant.numeric.klartext'
-        4:
-          name: 'variable.numeric.klartext'
-        5:
-          name: 'constant.string.klartext'
-    },
-    {
-      comment: 'spindle speed with number or Q-parameter'
-      match: '\\b(S)(?:(\\d+)|(Q[LR]\\d+))\\b'
-      captures:
-        1:
-          name: 'keyword.operator.klartext'
-        2:
-          name: 'constant.numeric.klartext'
-        3:
-          name: 'constant.string.klartext'
-    },
-    {
-      comment: 'machine function'
-      match: '\\b(M)(\\d+)\\b'
-      captures:
-        1:
-          name: 'keyword.operator.klartext'
-        2:
-          name: 'constant.numeric.klartext'
-    },
-    {
-      comment: 'tool radius correction and radial dirrection'
-      match: '\\b(R)(R|L)\\b'
-      captures:
-        1:
-          name: 'keyword.operator.klartext'
-        2:
-          name: 'constant.string.klartext'
-    },
-    {
-      comment: 'radius value'
-      match: '\\b(R)(\\d+(?:\\.\\d+)?)\\b'
-      captures:
-        1:
-          name: 'keyword.operator.klartext'
-        2:
-          name: 'constant.numeric.klartext'
-    },
-    {
-      comment: 'diameter value'
-      match: '\\b(D)(\\d+(?:\\.\\d+)?)\\b'
-      captures:
-        1:
-          name: 'keyword.operator.klartext'
-        2:
-          name: 'constant.numeric.klartext'
-    },
-    {
-      comment: 'direction of rotation for circular motion'
-      match: '\\b(DR)(\\+|-)'
-      captures:
-        1:
-          name: 'keyword.operator.klartext'
-        2:
-          name: 'constant.string.klartext'
-    },
-    {
-      comment: 'number value'
-      match: '\\b(NUM)(\\d+)'
-      captures:
-        1:
-          name: 'keyword.operator.klartext'
-        2:
-          name: 'constant.numerical.klartext'
-    },
-    {
-      comment: 'start value e.g. start angle'
-      match: '\\b(START)([\\+-]\\d+(?:\\.\\d+)?)'
-      captures:
-        1:
-          name: 'keyword.operator.klartext'
-        2:
-          name: 'constant.numerical.klartext'
-    },
-    {
-      comment: 'angle value'
-      match: '\\b(AN)([\\+-]\\d+(?:\\.\\d+)?)'
-      captures:
-        1:
-          name: 'keyword.operator.klartext'
-        2:
-          name: 'constant.numerical.klartext'
-    },
-    {
-      comment: 'distance value'
-      match: '\\b(DIST)(\\d+(?:\\.\\d)?)'
-      captures:
-        1:
-          name: 'keyword.operator.klartext'
-        2:
-          name: 'constant.numerical.klartext'
-    },
-    {
-      comment: 'move back'
-      match: '\\b(MB)(?:(\\d+)|( MAX))'
-      captures:
-        1:
-          name: 'keyword.operator.klartext'
-        2:
-          name: 'constant.numerical.klartext'
-        3:
-          name: 'constant.string.klartext'
-    },
-    {
-      comment: 'movment blocks'
-      match: '\\b(LP?|C[PRC]?|CTP?|RND|CHF)\\b'
-      name: 'keyword.control.klartext'
-    },
-    {
-      comment: 'FK commands'
-      match: '\\b(FL|FLT|FCT|FC)\\b'
-      name: 'keyword.control.klartext'
-    },
-    {
-      comment: 'FK commands - select'
-      match: '\\b(FSELECT)(\\d)'
-      captures:
-        1:
-          name: 'keyword.control.klartext'
-        2:
-          name: 'constant.numeric.klartext'
-    },
-    {
-      comment: 'lable definition with name or number'
-      match: '\\b(LBL )(?:(\\".*\\")|(\\d+))'
-      captures:
-        1:
-          name: 'keyword.control.klartext'
-        2:
-          name: 'constant.string.klartext'
-        3:
-          name: 'constant.numeric.klartext'
-    },
-    {
-      comment: 'lable call by name, number or q-parameter with number of repititions'
-      match: '\\b(CALL LBL )(?:(\\".*\\")|(\\d+)|(Q[LR]?\\d+)|(QS\\d+))(?:\\s(REP)(?:(\\d+)|(Q[LR]?\\d+)))?'
-      captures:
-        1:
-          name: 'keyword.control.klartext'
-        2:
-          name: 'constant.string.klartext'
-        3:
-          name: 'constant.numeric.klartext'
-        4:
-          name: 'variable.numeric.klartext'
-        5:
-          name: 'variable.string.klartext'
-        6:
-          name: 'keyword.operator.klartext'
-        7:
-          name: 'constant.numeric.klartext'
-        8:
-          name: 'variable.numeric.klartext'
-
-    },
-    {
-      comment: 'tool call'
-      match: '\\b(TOOL CALL) (?:(\\d+(?:\\.\\d+)?)|(\\".*\\")|(Q[LR]?\\d+))(\\s[XYZ])?'
-      captures:
-        1:
-          name: 'keyword.control.klartext'
-        2:
-          name: 'constant.numeric.klartext'
-        3:
-          name: 'constant.string.klartext'
-        4:
-          name: 'variable.numeric.klartext'
-        5:
-          name: 'constant.string.klartext'
-    },
-    {
-      comment: 'cycle definition - old style'
-      match: '\\b(CYCL DEF) (\\d+\\.0) (.*)'
-      captures:
-        1:
-          name: 'keyword.control.klartext'
-        2:
-          name: 'constant.numeric.klartext'
-        3:
-          name: 'comment.line.klartext'
-    },
-    {
-      comment: 'cycle definition - old style - continuation'
-      match: '\\b(CYCL DEF) (\\d+\\.[1-9][0-9]*)(?:\\s+([a-zA-Z\\s\\-]{2,})([\\+|-]?\\d+))?'
-      captures:
-        1:
-          name: 'keyword.control.klartext'
-        2:
-          name: 'constant.numeric.klartext'
-        3:
-          name: 'keyword.operator.klartext'
-        4:
-          name: 'constant.numeric.klartext'
-    },
-    {
-      comment: 'cycle definition - new style'
-      match: '\\b(CYCL DEF) (\\d+) ((?:[\\d\\w\\s\\.]*)(?: ~))'
-      captures:
-        1:
-          name: 'keyword.control.klartext'
-        2:
-          name: 'constant.numeric.klartext'
-        3:
-          name: 'comment.line.klartext'
-    },
-    {
-      comment: 'cycle definition - new style - touch probe'
-      match: '\\b(TCH PROBE) (\\d+) ((?:[\\d\\w\\s]*)(?: ~))'
-      captures:
-        1:
-          name: 'keyword.control.klartext'
-        2:
-          name: 'constant.numeric.klartext'
-        3:
-          name: 'comment.line.klartext'
-    },
-    {
-      comment: 'cycle definition - new style - continuation'
-      match: '\\s+(?:(Q\\d+)|(QS\\d+))(=)(?:([\\+-]?\\d+(?:\\.\\d+)?)|([\\+-]Q[LR]?\\d+)|( AUTO)|( MAX)|(\\".*\\")|(?:( FU)([\\+-]\\d+\\.\\d+)))'
-      captures:
-        1:
-          name: 'variable.numeric.klartext' #Q100
-        2:
-          name: 'variable.string.klartext' #QS100
-        3:
-          name: 'keyword.operator.klartext' #=
-        4:
-          name: 'constant.numeric.klartext' #nummer
-        5:
-          name: 'variable.numeric.klartext' #Qpar
-        6:
-          name: 'constant.string.klartext' #const_str
-        7:
-          name: 'constant.string.klartext' #const_str
-        8:
-          name: 'constant.string.klartext' #str
-        9:
-          name: 'keyword.operator.klartext' #fu
-        10:
-          name: 'constant.numeric.klartext' #fu
-    },
-    {
-      comment: 'cycle call'
-      match: '\\b(CYCL CALL) (POS|PAT)?'
-      captures:
-        1:
-          name: 'keyword.control.klartext'
-        2:
-          name: 'keyword.operator.klartext'
-    },
-    {
-      comment: 'program call'
-      match: '\\b(CALL PGM) (.*)'
-      captures:
-        1:
-          name: 'keyword.control.klartext'
-        2:
-          name: 'constant.string.klartext'
-    },
-    {
-      comment: 'program stop'
-      match: '\\b(STOP)'
-      name: 'keyword.control.klartext'
-    },
-    {
-      comment: 'special functions - PLANE'
-      match: '\\b(PLANE) (RESET|SPATIAL|PROJECTED|EULER|VECTOR|POINTS|RELATIV|AXIAL)'
-      captures:
-        1:
-          'name': 'keyword.control.klartext'
-        2:
-          'name': 'constant.string.klartext'
-    },
-    {
-      comment: 'FN functions'
-      match: '\\b(FN) (\\d+): (IF|ERROR|F-PRINT|SYSREAD|PLC|WAIT FOR|EXPORT|TABOPEN|TABWRITE|TABREAD)?'
-      captures:
-        1:
-          name: 'keyword.control.klartext'
-        2:
-          name: 'constant.numeric.klartext'
-        3:
-          name: 'keyword.operator.klartext'
-    },
-    {
-      comment: 'keywords for FN functions'
-      match: '\\b(ID)(\\d+) (NR)(\\d+) (IDX)(?:(\\d+)|(Q\\d+))'
-      captures:
-        1:
-          name: 'keyword.control.klartext'
-        2:
-          name: 'constant.numeric.klartext'
-        3:
-          name: 'keyword.control.klartext'
-        4:
-          name: 'constant.numeric.klartext'
-        5:
-          name: 'keyword.control.klartext'
-        6:
-          name: 'constant.numeric.klartext'
-        7:
-          name: 'variable.numeric.klartext'
-    },
-    {
-      comment: 'keywords for FN functions'
-      match: '\\b(SRC_|SEA_|LEN)'
-      name: 'keyword.control.klartext'
-    },
-    {
-      comment: 'keywords for FN functions'
-      match: '\\b(DECLARE STRING|STRCOMP|SUBSTR|STRLEN|INSTR)'
-      name: 'keyword.control.klartext'
-    },
-    {
-      comment: 'keywords for FN functions'
-      match: '\\b(DIV|EQU|COS|SIN|TAN|LT|GT|GOTO)'
-      name: 'keyword.control.klartext'
-    },
-    {
-      comment: 'special functions - TCPM'
-      match: '\\b(FUNCTION) ((?:MODE (?:MILL|TURN))|(?:TURNDATA SPIN))'
-      captures:
-        1:
-          name: 'keyword.control.klartext'
-        2:
-          name: 'keyword.operator.klartext'
-    },
-    {
-      comment: 'pattern definition - file'
-      match: '\\b(SEL PATTERN) (\\".*\\")'
-      captures:
-        1:
-          name: 'keyword.control.klartext'
-        2:
-          name: 'constant.string.klartext'
-    },
-    {
-      comment: 'pattern definition - header'
-      match: '\\b(PATTERN DEF)'
-      captures:
-        1:
-          name: 'keyword.control.klartext'
-        2:
-          name: 'comment.line.klartext'
-    },
-    {
-      comment: 'pattern definition - patern'
-      match: '\\s+(POS|CIRC)(\\d)'
-      captures:
-        1:
-          name: 'keyword.operator.klartext'
-        2:
-          name: 'constant.numeric.klartext'
-    },
-    {
-      comment: 'pattern definition - ending'
-      match: '\\s(~)$'
-      name: 'comment.line.klartext'
-    },
-  ]
+  {
+    comment: 'program head and foot'
+    match: '\\b((?:BEGIN|END) PGM) (.*?)\\b(MM|INCH) ?$'
+    captures:
+      1:
+        name: 'keyword.other.klartext'
+      2:
+        name: 'comment.klartext'
+      3:
+        name: 'constant.string.klartext'
+  },
+  {
+    comment: 'line number'
+    match: '^(\\d+)'
+    name: 'comment.line.klartext'
+  },
+  {
+    comment: 'block form cuboid'
+    match: '\\b(BLK FORM) (0.[12]) ([XYZ])?'
+    captures:
+      1:
+        name: 'keyword.control.klartext'
+      2:
+        name: 'constant.numeric.klartext'
+      3:
+        name: 'constant.string.klartext'
+  },
+  {
+    comment: 'block form cylinder'
+    match: '\\b(BLK FORM CYLINDER) ([XYZ])(?: (R|D)(\\d+))(?: (L)(\\d+))(?: (DIST)([\\+-]\\d+))?(?: (DI)(\\d+))?'
+    captures:
+      1:
+        name: 'keyword.control.klartext'
+      2:
+        name: 'constant.string.klartext'
+      3:
+        name: 'keyword.operator.klartext'
+      4:
+        name: 'constant.numeric.klartext'
+      5:
+        name: 'keyword.operator.klartext'
+      6:
+        name: 'constant.numeric.klartext'
+      7:
+        name: 'keyword.operator.klartext'
+      8:
+        name: 'constant.numeric.klartext'
+      9:
+        name: 'keyword.operator.klartext'
+      10:
+        name: 'constant.numeric.klartext'
+  },
+  {
+    comment: 'block form rotational body'
+    match: '\\b(BLK FORM ROTATION) ([XYZ]) (DIM_)([DR]) (?:(\\".*\\")|(\\d+))'
+    captures:
+      1:
+        name: 'keyword.control.klartext'
+      2:
+        name: 'constant.string.klartext'
+      3:
+        name: 'keyword.operator.klartext'
+      4:
+        name: 'constant.string.klartext'
+      5:
+        name: 'constant.string.klartext'
+      6:
+        name: 'constant.numeric.klartext'
+  },
+  {
+    comment: 'comment until the end of the line'
+    match: ';(.*)$'
+    name: 'comment.line.klartext'
+  },
+  {
+    comment: 'outline block'
+    match: '\\* - (.*)$'
+    name: 'comment.block.klartext'
+  },
+  {
+    comment: 'string between double quotes'
+    match: '"(.*)"'
+    name: 'constant.string.quoted.klartext'
+  },
+  {
+    comment: 'cartesian coordinate with number or Q-parameter'
+    match: '\\b(I?[XYZ])(?:([\\+-]\\d+(?:\\.\\d+)?)|([\\+-]Q[LR]?\\d+))\\b'
+    captures:
+      1:
+        name: 'keyword.operator.klartext'
+      2:
+        name: 'constant.numeric.klartext'
+      3:
+        name: 'variable.numeric.klartext'
+  },
+  {
+    comment: 'angular coordinate with number or Q-parameter'
+    match: '\\b(I?[ABC])(?:([\\+-]\\d+(?:\\.\\d+)?)|([\\+-]Q[LR]?\\d+))\\b'
+    captures:
+      1:
+        name: 'keyword.operator.klartext'
+      2:
+        name: 'constant.numeric.klartext'
+      3:
+        name: 'variable.numeric.klartext'
+  },
+  {
+    comment: 'spacial angular coordinate'
+    match: '\\b(SP[ABC])([\\+-]\\d+(?:\\.\\d+)?)\\b'
+    captures:
+      1:
+        name: 'keyword.operator.klartext'
+      2:
+        name: 'constant.numeric.klartext'
+  },
+  {
+    comment: 'polar coordinate with number or Q-parameter'
+    match: '\\b(I?P[AR])(?:([\\+-]\\d+(?:\\.\\d+)?)|([\\+-]Q[LR]?\\d+))\\b'
+    captures:
+      1:
+        name: 'keyword.operator.klartext'
+      2:
+        name: 'constant.numeric.klartext'
+      3:
+        name: 'variable.numeric.klartext'
+  },
+  {
+    comment: 'angular coordinate with number or Q-parameter'
+    match: '\\b(CC[XY])(?:([\\+-]\\d+(?:\\.\\d+)?)|([\\+-]Q[LR]?\\d+))\\b'
+    captures:
+      1:
+        name: 'keyword.operator.klartext'
+      2:
+        name: 'constant.numeric.klartext'
+      3:
+        name: 'variable.numeric.klartext'
+  },
+  {
+    comment: 'Q-parameter (regular, lokal and remanent)'
+    match: '\\b(Q[LR]?[0-9]+)\\b(?!=)'
+    name: 'variable.numeric.klartext'
+  },
+  {
+    comment: 'Q-parameter (string)'
+    match: '\\b(QS[0-9]+)\\b(?!=)'
+    name: 'variable.string.klartext'
+  },
+  {
+    comment: 'arithmetic operators'
+    match: '\\s(\\+|-)\\s'
+    name: 'keyword.operator.arithmetic.klartext'
+  },
+  {
+    comment: 'assignment operators'
+    match: '\\s=\\s'
+    name: 'keyword.operator.assignment.klartext'
+  },
+  {
+    comment: 'feedrate with number or Q-parameter'
+    match: '\\b(F)(?:(MAX)|(\\d+(?:\\.\\d+)?)|(Q[LR]?\\d+)|( AUTO))\\b'
+    captures:
+      1:
+        name: 'keyword.operator.klartext'
+      2:
+        name: 'constant.string.klartext'
+      3:
+        name: 'constant.numeric.klartext'
+      4:
+        name: 'variable.numeric.klartext'
+      5:
+        name: 'constant.string.klartext'
+  },
+  {
+    comment: 'spindle speed with number or Q-parameter'
+    match: '\\b(S)(?:(\\d+)|(Q[LR]\\d+))\\b'
+    captures:
+      1:
+        name: 'keyword.operator.klartext'
+      2:
+        name: 'constant.numeric.klartext'
+      3:
+        name: 'constant.string.klartext'
+  },
+  {
+    comment: 'machine function'
+    match: '\\b(M)(\\d+)\\b'
+    captures:
+      1:
+        name: 'keyword.operator.klartext'
+      2:
+        name: 'constant.numeric.klartext'
+  },
+  {
+    comment: 'tool radius correction and radial dirrection'
+    match: '\\b(R)(R|L)\\b'
+    captures:
+      1:
+        name: 'keyword.operator.klartext'
+      2:
+        name: 'constant.string.klartext'
+  },
+  {
+    comment: 'radius value'
+    match: '\\b(R)(\\d+(?:\\.\\d+)?)\\b'
+    captures:
+      1:
+        name: 'keyword.operator.klartext'
+      2:
+        name: 'constant.numeric.klartext'
+  },
+  {
+    comment: 'diameter value'
+    match: '\\b(D)(\\d+(?:\\.\\d+)?)\\b'
+    captures:
+      1:
+        name: 'keyword.operator.klartext'
+      2:
+        name: 'constant.numeric.klartext'
+  },
+  {
+    comment: 'direction of rotation for circular motion'
+    match: '\\b(DR)(\\+|-)'
+    captures:
+      1:
+        name: 'keyword.operator.klartext'
+      2:
+        name: 'constant.string.klartext'
+  },
+  {
+    comment: 'number value'
+    match: '\\b(NUM)(\\d+)'
+    captures:
+      1:
+        name: 'keyword.operator.klartext'
+      2:
+        name: 'constant.numerical.klartext'
+  },
+  {
+    comment: 'start value e.g. start angle'
+    match: '\\b(START)([\\+-]\\d+(?:\\.\\d+)?)'
+    captures:
+      1:
+        name: 'keyword.operator.klartext'
+      2:
+        name: 'constant.numerical.klartext'
+  },
+  {
+    comment: 'angle value'
+    match: '\\b(AN)([\\+-]\\d+(?:\\.\\d+)?)'
+    captures:
+      1:
+        name: 'keyword.operator.klartext'
+      2:
+        name: 'constant.numerical.klartext'
+  },
+  {
+    comment: 'distance value'
+    match: '\\b(DIST)(\\d+(?:\\.\\d)?)'
+    captures:
+      1:
+        name: 'keyword.operator.klartext'
+      2:
+        name: 'constant.numerical.klartext'
+  },
+  {
+    comment: 'move back'
+    match: '\\b(MB)(?:(\\d+)|( MAX))'
+    captures:
+      1:
+        name: 'keyword.operator.klartext'
+      2:
+        name: 'constant.numerical.klartext'
+      3:
+        name: 'constant.string.klartext'
+  },
+  {
+    comment: 'movment blocks'
+    match: '\\b(LP?|C[PRC]?|CTP?|RND|CHF)\\b'
+    name: 'keyword.control.klartext'
+  },
+  {
+    comment: 'FK commands'
+    match: '\\b(FL|FLT|FCT|FC)\\b'
+    name: 'keyword.control.klartext'
+  },
+  {
+    comment: 'FK commands - select'
+    match: '\\b(FSELECT)(\\d)'
+    captures:
+      1:
+        name: 'keyword.control.klartext'
+      2:
+        name: 'constant.numeric.klartext'
+  },
+  {
+    comment: 'lable definition with name or number'
+    match: '\\b(LBL )(?:(\\".*\\")|(\\d+))'
+    captures:
+      1:
+        name: 'keyword.control.klartext'
+      2:
+        name: 'constant.string.klartext'
+      3:
+        name: 'constant.numeric.klartext'
+  },
+  {
+    comment: 'lable call by name, number or q-parameter with number of repititions'
+    match: '\\b(CALL LBL )(?:(\\".*\\")|(\\d+)|(Q[LR]?\\d+)|(QS\\d+))(?:\\s(REP)(?:(\\d+)|(Q[LR]?\\d+)))?'
+    captures:
+      1:
+        name: 'keyword.control.klartext'
+      2:
+        name: 'constant.string.klartext'
+      3:
+        name: 'constant.numeric.klartext'
+      4:
+        name: 'variable.numeric.klartext'
+      5:
+        name: 'variable.string.klartext'
+      6:
+        name: 'keyword.operator.klartext'
+      7:
+        name: 'constant.numeric.klartext'
+      8:
+        name: 'variable.numeric.klartext'
+  },
+  {
+    comment: 'tool call'
+    match: '\\b(TOOL CALL) (?:(\\d+(?:\\.\\d+)?)|(\\".*\\")|(Q[LR]?\\d+))(\\s[XYZ])?'
+    captures:
+      1:
+        name: 'keyword.control.klartext'
+      2:
+        name: 'constant.numeric.klartext'
+      3:
+        name: 'constant.string.klartext'
+      4:
+        name: 'variable.numeric.klartext'
+      5:
+        name: 'constant.string.klartext'
+  },
+  {
+    comment: 'cycle definition - old style'
+    match: '\\b(CYCL DEF) (\\d+\\.0) (.*)'
+    captures:
+      1:
+        name: 'keyword.control.klartext'
+      2:
+        name: 'constant.numeric.klartext'
+      3:
+        name: 'comment.line.klartext'
+  },
+  {
+    comment: 'cycle definition - old style - continuation'
+    match: '\\b(CYCL DEF) (\\d+\\.[1-9][0-9]*)(?:\\s+([a-zA-Z\\s\\-]{2,})([\\+|-]?\\d+))?'
+    captures:
+      1:
+        name: 'keyword.control.klartext'
+      2:
+        name: 'constant.numeric.klartext'
+      3:
+        name: 'keyword.operator.klartext'
+      4:
+        name: 'constant.numeric.klartext'
+  },
+  {
+    comment: 'cycle definition - new style'
+    match: '\\b(CYCL DEF) (\\d+) ((?:[\\d\\w\\s\\.]*)(?: ~))'
+    captures:
+      1:
+        name: 'keyword.control.klartext'
+      2:
+        name: 'constant.numeric.klartext'
+      3:
+        name: 'comment.line.klartext'
+  },
+  {
+    comment: 'cycle definition - new style - touch probe'
+    match: '\\b(TCH PROBE) (\\d+) ((?:[\\d\\w\\s]*)(?: ~))'
+    captures:
+      1:
+        name: 'keyword.control.klartext'
+      2:
+        name: 'constant.numeric.klartext'
+      3:
+        name: 'comment.line.klartext'
+  },
+  {
+    comment: 'cycle definition - new style - continuation'
+    match: '\\s+(?:(Q\\d+)|(QS\\d+))(=)(?:([\\+-]?\\d+(?:\\.\\d+)?)|([\\+-]Q[LR]?\\d+)|( AUTO)|( MAX)|(\\".*\\")|(?:( FU)([\\+-]\\d+\\.\\d+)))'
+    captures:
+      1:
+        name: 'variable.numeric.klartext' #Q100
+      2:
+        name: 'variable.string.klartext' #QS100
+      3:
+        name: 'keyword.operator.klartext' #=
+      4:
+        name: 'constant.numeric.klartext' #nummer
+      5:
+        name: 'variable.numeric.klartext' #Qpar
+      6:
+        name: 'constant.string.klartext' #const_str
+      7:
+        name: 'constant.string.klartext' #const_str
+      8:
+        name: 'constant.string.klartext' #str
+      9:
+        name: 'keyword.operator.klartext' #fu
+      10:
+        name: 'constant.numeric.klartext' #fu
+  },
+  {
+    comment: 'cycle call'
+    match: '\\b(CYCL CALL) (POS|PAT)?'
+    captures:
+      1:
+        name: 'keyword.control.klartext'
+      2:
+        name: 'keyword.operator.klartext'
+  },
+  {
+    comment: 'program call'
+    match: '\\b(CALL PGM) (.*)'
+    captures:
+      1:
+        name: 'keyword.control.klartext'
+      2:
+        name: 'constant.string.klartext'
+  },
+  {
+    comment: 'program stop'
+    match: '\\b(STOP)'
+    name: 'keyword.control.klartext'
+  },
+  {
+    comment: 'special functions - PLANE'
+    match: '\\b(PLANE) (RESET|SPATIAL|PROJECTED|EULER|VECTOR|POINTS|RELATIV|AXIAL)'
+    captures:
+      1:
+        'name': 'keyword.control.klartext'
+      2:
+        'name': 'constant.string.klartext'
+  },
+  {
+    comment: 'FN functions'
+    match: '\\b(FN) (\\d+): (IF|ERROR|F-PRINT|SYSREAD|PLC|WAIT FOR|EXPORT|TABOPEN|TABWRITE|TABREAD)?'
+    captures:
+      1:
+        name: 'keyword.control.klartext'
+      2:
+        name: 'constant.numeric.klartext'
+      3:
+        name: 'keyword.operator.klartext'
+  },
+  {
+    comment: 'keywords for FN functions'
+    match: '\\b(ID)(\\d+) (NR)(\\d+) (IDX)(?:(\\d+)|(Q\\d+))'
+    captures:
+      1:
+        name: 'keyword.control.klartext'
+      2:
+        name: 'constant.numeric.klartext'
+      3:
+        name: 'keyword.control.klartext'
+      4:
+        name: 'constant.numeric.klartext'
+      5:
+        name: 'keyword.control.klartext'
+      6:
+        name: 'constant.numeric.klartext'
+      7:
+        name: 'variable.numeric.klartext'
+  },
+  {
+    comment: 'keywords for FN functions'
+    match: '\\b(SRC_|SEA_|LEN)'
+    name: 'keyword.control.klartext'
+  },
+  {
+    comment: 'keywords for FN functions'
+    match: '\\b(DECLARE STRING|STRCOMP|SUBSTR|STRLEN|INSTR)'
+    name: 'keyword.control.klartext'
+  },
+  {
+    comment: 'keywords for FN functions'
+    match: '\\b(DIV|EQU|COS|SIN|TAN|LT|GT|GOTO)'
+    name: 'keyword.control.klartext'
+  },
+  {
+    comment: 'special functions - TCPM'
+    match: '\\b(FUNCTION) ((?:MODE (?:MILL|TURN))|(?:TURNDATA SPIN))'
+    captures:
+      1:
+        name: 'keyword.control.klartext'
+      2:
+        name: 'keyword.operator.klartext'
+  },
+  {
+    comment: 'pattern definition - file'
+    match: '\\b(SEL PATTERN) (\\".*\\")'
+    captures:
+      1:
+        name: 'keyword.control.klartext'
+      2:
+        name: 'constant.string.klartext'
+  },
+  {
+    comment: 'pattern definition - header'
+    match: '\\b(PATTERN DEF)'
+    captures:
+      1:
+        name: 'keyword.control.klartext'
+      2:
+        name: 'comment.line.klartext'
+  },
+  {
+    comment: 'pattern definition - patern'
+    match: '\\s+(POS|CIRC)(\\d)'
+    captures:
+      1:
+        name: 'keyword.operator.klartext'
+      2:
+        name: 'constant.numeric.klartext'
+  },
+  {
+    comment: 'pattern definition - ending'
+    match: '\\s(~)$'
+    name: 'comment.line.klartext'
+  },
+]
 repository: [
   float_value:
     match: '[\\+-]\\d+(?:\\.\\d+)?'
