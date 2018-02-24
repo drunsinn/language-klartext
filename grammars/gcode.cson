@@ -1,13 +1,14 @@
 scopeName : 'source.g-code.generic'
 name: 'G-Code - Generic'
 fileTypes: [
-  'i', # generic nc program
-  'nc', # generic nc program
+  'i',
+  'nc',
   'gcode',
   'ngc',
 ]
 
-firstLineMatch: '^[^%]'
+limitLineLength: false
+# firstLineMatch: '^[^%]'
 
 patterns: [
   {
@@ -17,7 +18,7 @@ patterns: [
   },
   {
     comment: 'comment'
-    match: '(\\(.*\\))$'
+    match: '(\\(.*\\))'
     name: 'comment.line.g-code'
   },
   {
@@ -27,12 +28,14 @@ patterns: [
   },
   {
     comment: 'G-Command'
-    match: '\\b(G)(\\d+)\\b'
+    match: '\\b(G)(\\d+)(\\.\\d)?\\b'
     captures:
       1:
         name: 'keyword.control.g-code'
       2:
         name: 'constant.numeric.g-code'
+      3:
+        name: 'keyword.operator.g-code'
   },
   {
     comment: 'Machine Function'
@@ -63,7 +66,7 @@ patterns: [
   },
   {
     comment: 'Spindle speed'
-    match: '\\b(S)(\\d+)\\b'
+    match: '\\b(S)(\\d+(?:\\.\\d+)?)\\b'
     captures:
       1:
         name: 'keyword.operator.g-code'

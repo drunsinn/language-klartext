@@ -1,12 +1,12 @@
-'menu': [
-  'label': 'Packages'
-  'submenu': [
-    'label': 'Klartext/G-Code'
-    'submenu': [
-      { 'label': 'Remove Line Numbers', 'command': 'language-klartext:remove_line_numbers' }
-      { 'label': 'Add Line Numbers', 'command': 'language-klartext:add_line_numbers' }
-      { 'label': 'Renumber Lines', 'command': 'language-klartext:renumber_lines' }
-      { 'label': 'Correct number format', 'command': 'language-klartext:correct_number_format' }
+menu: [
+  label: 'Packages'
+  submenu: [
+    label: 'Klartext/G-Code'
+    submenu: [
+      { label: 'Remove Line Numbers', command: 'language-klartext:remove_line_numbers' }
+      { label: 'Add Line Numbers', command: 'language-klartext:add_line_numbers' }
+      { label: 'Renumber Lines', command: 'language-klartext:renumber_lines' }
+      { label: 'Correct number format', command: 'language-klartext:correct_number_format' }
     ]
   ]
 ]

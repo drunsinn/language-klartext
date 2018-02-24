@@ -4,6 +4,7 @@ fileTypes: [
   'mpf', # sinumerik main program
   'spf', # sinumerik sub programm
 ]
+limitLineLength: false
 
 patterns: [
   {

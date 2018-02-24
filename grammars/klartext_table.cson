@@ -1,0 +1,62 @@
+scopeName: 'source.klartext.table'
+name: 'Table'
+fileTypes: [
+#  'PNT',
+  'H.T.DEP'
+]
+limitLineLength: false
+firstLineMatch: '^(BEGIN) (.*) (MM|INCH)$'
+
+patterns: [
+  {
+    comment: 'table head'
+    match: '^(BEGIN) (.*) (MM)$'
+    captures:
+      1: name: 'keyword.other.klartext.table'
+      2: name: 'comment.line.klartext.table'
+      3: name: 'constant.string.klartext.table'
+  },
+  {
+    comment: 'table foot'
+    match: '^(\\[END\\])$'
+    name: 'keyword.other.klartext.table'
+  },
+  {
+    comment: 'CfgColumnDescription'
+    begin: 'CfgColumnDescription \\('
+    beginCaptures:
+      0: name: 'comment.line.klartext.table'
+    end: '\\)'
+    endCaptures:
+      0: name: 'comment.line.klartext.table'
+    name: 'meta.section.klartext.table'
+    patterns: [
+      {
+        comment: 'Numerical Value'
+        match: '\\b(.+)(:=)(\\d+)'
+        captures:
+          1: name: 'keyword.other.klartext.table'
+          2: name: 'punctuation.definition.klartext.table'
+          3: name: 'constant.numeric.klartext.table'
+      },
+      {
+        comment: 'Quoted String'
+        match: '\\b(.+)(:=)(\\".*\\")?'
+        captures:
+          1: name: 'keyword.other.klartext.table'
+          2: name: 'punctuation.definition.klartext.table'
+          3: name: 'constant.string.klartext.table'
+      },
+      {
+        comment: 'Keyword'
+        match: '\\b(.+)(:=)(DEC|FALSE|LENGTH|FLOAT|TEXT|TRUE)'
+        captures:
+          1: name: 'keyword.other.klartext.table'
+          2: name: 'punctuation.definition.klartext.table'
+          3: name: 'constant.string.klartext.table'
+          4: name: 'punctuation.definition.klartext.table'
+      },
+    ]
+
+  },
+]

@@ -19,7 +19,7 @@ G-Code - Siemens: .mpf, .spf
 - Numbering Increment for G-Code
 Adjust increment for line numbers in nc code
 
-# Changelog
+# Change-log
 See [CHANGELOG.md](CHANGELOG.md)
 
 # License

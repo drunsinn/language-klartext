@@ -4,7 +4,7 @@ fileTypes: [
   'ncs',
   'nc',
 ]
-
+limitLineLength: false
 foldingStartMarker: 'UNIT'
 foldingStopMarker: 'END_OF_UNIT'
 firstLineMatch: '%[\\w\\d_]+\\.[ncsNCS]+\\s+"TURN_V1\\.0"'

@@ -3,11 +3,8 @@ name: 'Klartext'
 fileTypes: [
   'H'
 ]
-
-firstLineMatch: '^(\\d+) +(BEGIN PGM) (.*?)\\b(MM|INCH) ?$'
-foldingStartMarker: ''
-foldingStopMarker: ''
 limitLineLength: false
+firstLineMatch: '^(\\d+) +(BEGIN PGM) (.*?)\\b(MM|INCH) ?$'
 
 patterns: [
   {
@@ -24,6 +21,11 @@ patterns: [
   {
     comment: 'line number'
     match: '^(\\d+)'
+    name: 'comment.line.klartext'
+  },
+  {
+    comment: 'line number'
+    match: '^/ (.*)$'
     name: 'comment.line.klartext'
   },
   {
@@ -86,7 +88,7 @@ patterns: [
   },
   {
     comment: 'outline block'
-    match: '\\* - (.*)$'
+    match: '\\*\\s+- (.*)$'
     name: 'comment.block.klartext'
   },
   {
@@ -377,7 +379,7 @@ patterns: [
   },
   {
     comment: 'cycle definition - new style'
-    match: '\\b(CYCL DEF) (\\d+) ((?:[\\d\\w\\s\\.]*)(?: ~))'
+    match: '\\b(CYCL DEF) (\\d+) ((?:[\\d\\w\\s\\.-]*)(?: ~))'
     captures:
       1:
         name: 'keyword.control.klartext'
@@ -424,12 +426,8 @@ patterns: [
   },
   {
     comment: 'cycle call'
-    match: '\\b(CYCL CALL) (POS|PAT)?'
-    captures:
-      1:
-        name: 'keyword.control.klartext'
-      2:
-        name: 'keyword.operator.klartext'
+    match: '\\b(CYCL CALL)(?: (POS|PAT))?'
+    name: 'keyword.control.klartext'
   },
   {
     comment: 'program call'

@@ -5,29 +5,24 @@ fileTypes: [
 ]
 
 firstLineMatch: '^(BEGIN) (.*) (MM|INCH)$'
-foldingStartMarker: ''
-foldingStopMarker: ''
 
 patterns: [
-    {
-      comment: 'table head'
-      match: '^(BEGIN) (.*) (MM)$'
-      captures:
-        1:
-          name: 'keyword.other.table.points'
-        2:
-          name: 'comment.line.table.points'
-        3:
-          name: 'constant.string.table.points'
-    },
-    {
-      comment: 'table foot'
-      match: '^(\\[END\\])$'
-      name: 'keyword.other.table.points'
-    },
-    {
-      comment: 'numbers'
-      match: '\\s([\\+-]\\d+(?:\\.\\d+)?)\\s'
-      name: 'constant.numeric.table.points'
-    },
-  ]
+  {
+    comment: 'table head'
+    match: '^(BEGIN) (.*) (MM)$'
+    captures:
+      1: name: 'keyword.other.table.points'
+      2: name: 'comment.line.table.points'
+      3: name: 'constant.string.table.points'
+  },
+  {
+    comment: 'table foot'
+    match: '^(\\[END\\])$'
+    name: 'keyword.other.table.points'
+  },
+  {
+    comment: 'numbers'
+    match: '\\s([\\+-]\\d+(?:\\.\\d+)?)\\s'
+    name: 'constant.numeric.table.points'
+  },
+]
