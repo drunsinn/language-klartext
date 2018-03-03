@@ -539,11 +539,3 @@ patterns: [
     name: 'comment.line.klartext'
   },
 ]
-repository: [
-  float_value:
-    match: '[\\+-]\\d+(?:\\.\\d+)?'
-    name: 'constant.float.klartext'
-  q_value:
-    match: '[\\+-]Q[LR]?\\d+'
-    name: 'variable.float.klartext'
-]

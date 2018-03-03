@@ -1,3 +1,9 @@
+## 0.7.0
+* new grammar for fanuc g-code
+* seperate g-code grammars for sinumeric, pilot, fanuc and generic
+* fixed error in file inspection for g-code
+* removed non working grammar repository
+
 ## 0.6.2 - split g-code grammars
 * split g-code grammars into different file
 * inspect first line of g-code file to decide which dialect to use

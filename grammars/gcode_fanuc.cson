@@ -1,14 +1,22 @@
-scopeName : 'source.g-code.generic'
-name: 'G-Code - Generic'
+scopeName : 'source.g-code.fanuc'
+name: 'G-Code - Fanuc'
 fileTypes: [
-  'i',
   'nc',
-  'gcode',
-  'ngc',
+  'cod'
 ]
 limitLineLength: false
+firstLineMatch: 'O\\d{4}'
 
 patterns: [
+  {
+    comment: 'program name'
+    match: '^(O)(\\d{4})'
+    captures:
+      1:
+        name: 'keyword.control.g-code'
+      2:
+        name: 'constant.numeric.g-code'
+  },
   {
     comment: 'line number'
     match: '^N\\s*\\d+'

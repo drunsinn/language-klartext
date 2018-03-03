@@ -1,13 +1,31 @@
 # language-klartext theme
 
-Syntax theme for the NC programing languages Klartext (used on HEIDENHAIN TNC controls) an G-Code (aka DIN/ISO) in different dialects.
-
-Klartext filetypes: .H
-G-Code - Generic: .i, .nc
-G-Code - CNCpilot and ManualPlus: .i, .nc
-G-Code - Siemens: .mpf, .spf
+Syntax highlighting for the G-Code and other NC related file types.
+Supports Klartext (used on HEIDENHAIN TNC controls) an G-Code (aka DIN/ISO) in different dialects.
 
 ![Screenshot](_img/screenshot.png?raw=true "Screenshot")
+
+## File Types
+
+### Klartext
+* File extentions: .H
+* Header: Yes
+
+### G-Code - Generic
+* File extentions: .i, .nc, .gcode, .ngc
+* Header: No
+
+### G-Code - CNCpilot and ManualPlus
+* File extentions: .i, .nc
+* Header: Yes
+
+### G-Code - Siemens
+* File extentions: .mpf, .spf
+* Header: No
+
+### G-Code - Fanuc
+* File extentions: .nc, .cod
+* Header: Yes
 
 ## Features
 
