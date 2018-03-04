@@ -32,6 +32,7 @@ Supports Klartext (used on HEIDENHAIN TNC controls) an G-Code (aka DIN/ISO) in d
 * Syntax highlighting for NC programs
 * add, remove and reset line numbers
 * correct format of numbers (from 1,234 to 1.234)
+* language specific settings (e.g. comment start and tab length)
 
 ## Settings
 - Numbering Increment for G-Code

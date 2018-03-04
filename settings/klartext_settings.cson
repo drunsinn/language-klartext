@@ -1,0 +1,56 @@
+'.source.g-code.cncpilot':
+  'editor':
+    'autoIndent': false
+    'autoIndentOnPaste': false
+    'softTabs': true
+    'tabLength': 2
+    'commentStart': '[ '
+    'commentEnd': ' ]'
+    'tabType': 'soft'
+'.source.g-code.fanuc':
+  'editor':
+    'autoIndent': false
+    'autoIndentOnPaste': false
+    'softTabs': true
+    'tabLength': 2
+    'commentStart': '( '
+    'commentEnd': ' )'
+    'tabType': 'soft'
+'.source.g-code.generic':
+  'editor':
+    'autoIndent': false
+    'autoIndentOnPaste': false
+    'softTabs': true
+    'tabLength': 2
+    'commentStart': '/ '
+    'tabType': 'soft'
+'.source.g-code.siemens':
+  'editor':
+    'autoIndent': false
+    'autoIndentOnPaste': false
+    'softTabs': true
+    'tabLength': 2
+    'commentStart': '; '
+    'tabType': 'soft'
+'.source.klartext':
+  'editor':
+    'autoIndent': false
+    'autoIndentOnPaste': false
+    'softTabs': true
+    'tabLength': 2
+    'commentStart': '/ '
+    'tabType': 'soft'
+'.source.table.points':
+  'editor':
+    'autoIndent': false
+    'autoIndentOnPaste': false
+    'softTabs': true
+    'tabLength': 2
+    'tabType': 'soft'
+'.source.klartext.table':
+  'editor':
+    'autoIndent': false
+    'autoIndentOnPaste': false
+    'softTabs': true
+    'tabLength': 2
+    'tabType': 'soft'
