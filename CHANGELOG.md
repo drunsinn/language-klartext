@@ -1,3 +1,6 @@
+## 0.8.0
+* default values for language settings
+
 ## 0.7.0
 * new grammar for fanuc g-code
 * seperate g-code grammars for sinumeric, pilot, fanuc and generic

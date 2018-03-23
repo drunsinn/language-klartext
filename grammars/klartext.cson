@@ -29,8 +29,8 @@ patterns: [
     name: 'comment.line.klartext'
   },
   {
-    comment: 'block form cuboid'
-    match: '\\b(BLK FORM) (0.[12]) ([XYZ])?'
+    comment: 'block form cuboid - first line'
+    match: '\\b(BLK FORM) (0.1) ([XYZ])'
     captures:
       1:
         name: 'keyword.control.klartext'
@@ -38,6 +38,15 @@ patterns: [
         name: 'constant.numeric.klartext'
       3:
         name: 'constant.string.klartext'
+  },
+  {
+    comment: 'block form cuboid - second line'
+    match: '\\b(BLK FORM) (0.2)'
+    captures:
+      1:
+        name: 'keyword.control.klartext'
+      2:
+        name: 'constant.numeric.klartext'
   },
   {
     comment: 'block form cylinder'
@@ -185,6 +194,15 @@ patterns: [
         name: 'constant.string.klartext'
   },
   {
+    comment: 'feedrate per tooth'
+    match: '\\b(FZ)(\\d+(?:\\.\\d+)?)\\b'
+    captures:
+      1:
+        name: 'keyword.operator.klartext'
+      2:
+        name: 'constant.numeric.klartext'
+  },
+  {
     comment: 'spindle speed with number or Q-parameter'
     match: '\\b(S)(?:(\\d+)|(Q[LR]\\d+))\\b'
     captures:
@@ -194,6 +212,17 @@ patterns: [
         name: 'constant.numeric.klartext'
       3:
         name: 'constant.string.klartext'
+  },
+  {
+    comment: 'spindle speed from cuting speed'
+    match: '(S)\\( (VC) = (\\d+) \\)'
+    captures:
+      1:
+        name: 'keyword.operator.klartext'
+      2:
+        name: 'keyword.control.klartext'
+      3:
+        name: 'constant.numeric.klartext'
   },
   {
     comment: 'machine function'
@@ -225,6 +254,24 @@ patterns: [
   {
     comment: 'diameter value'
     match: '\\b(D)(\\d+(?:\\.\\d+)?)\\b'
+    captures:
+      1:
+        name: 'keyword.operator.klartext'
+      2:
+        name: 'constant.numeric.klartext'
+  },
+  {
+    comment: 'radial correction value for tool'
+    match: '\\b(DR)([\\+-]\\d+(?:\\.\\d+)?)\\b'
+    captures:
+      1:
+        name: 'keyword.operator.klartext'
+      2:
+        name: 'constant.numeric.klartext'
+  },
+  {
+    comment: 'length correction value for tool'
+    match: '\\b(DL)([\\+-]\\d+(?:\\.\\d+)?)\\b'
     captures:
       1:
         name: 'keyword.operator.klartext'
@@ -289,8 +336,28 @@ patterns: [
   },
   {
     comment: 'movment blocks'
-    match: '\\b(LP?|C[PRC]?|CTP?|RND|CHF)\\b'
+    match: '\\b(LP?|C[PRC]?|CTP?)\\b'
     name: 'keyword.control.klartext'
+  },
+  {
+    comment: 'chamfer with value'
+    match: '\\b(RND|CHF) (\\d+(?:\\.\\d)?)\\b'
+    captures:
+      1:
+        name: 'keyword.control.klartext'
+      2:
+        name: 'constant.numerical.klartext'
+  },
+  {
+    comment: 'radius with value'
+    match: '\\b(RND) (R)(\\d+(?:\\.\\d)?)\\b'
+    captures:
+      1:
+        name: 'keyword.control.klartext'
+      2:
+        name: 'keyword.operator.klartext'
+      3:
+        name: 'constant.numerical.klartext'
   },
   {
     comment: 'FK commands'
@@ -354,6 +421,23 @@ patterns: [
         name: 'constant.string.klartext'
   },
   {
+    comment: 'tool definition'
+    match: '\\b(TOOL DEF) (\\d+) (L)([\\+|-]\\d+(?:\\.\\d+)?) (R)([\\+|-]\\d+(?:\\.\\d+)?)'
+    captures:
+      1:
+        name: 'keyword.control.klartext'
+      2:
+        name: 'constant.numeric.klartext'
+      3:
+        name: 'keyword.operator.klartext'
+      4:
+        name: 'constant.numeric.klartext'
+      5:
+        name: 'keyword.operator.klartext'
+      6:
+        name: 'constant.numeric.klartext'
+  },
+  {
     comment: 'cycle definition - old style'
     match: '\\b(CYCL DEF) (\\d+\\.0) (.*)'
     captures:
@@ -366,7 +450,7 @@ patterns: [
   },
   {
     comment: 'cycle definition - old style - continuation'
-    match: '\\b(CYCL DEF) (\\d+\\.[1-9][0-9]*)(?:\\s+([a-zA-Z\\s\\-]{2,})([\\+|-]?\\d+))?'
+    match: '\\b(CYCL DEF) (\\d+\\.[1-9][0-9]*)(?:\\s+([a-zA-Z\\s\\-\\.]{2,})([\\+|-]?\\d+(?:\\.\\d+)?))?'
     captures:
       1:
         name: 'keyword.control.klartext'

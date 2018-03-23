@@ -1,7 +1,6 @@
 scopeName: 'source.klartext.table'
 name: 'Table'
 fileTypes: [
-#  'PNT',
   'H.T.DEP'
 ]
 limitLineLength: false
@@ -41,7 +40,7 @@ patterns: [
       },
       {
         comment: 'Quoted String'
-        match: '\\b(.+)(:=)(\\".*\\")?'
+        match: '\\b(.+)(:=)(\\".*\\")'
         captures:
           1: name: 'keyword.other.klartext.table'
           2: name: 'punctuation.definition.klartext.table'
@@ -49,12 +48,11 @@ patterns: [
       },
       {
         comment: 'Keyword'
-        match: '\\b(.+)(:=)(DEC|FALSE|LENGTH|FLOAT|TEXT|TRUE)'
+        match: '\\b(.+)(:=)(DEC|INT|FALSE|LENGTH|FLOAT|TEXT|TRUE)'
         captures:
           1: name: 'keyword.other.klartext.table'
           2: name: 'punctuation.definition.klartext.table'
-          3: name: 'constant.string.klartext.table'
-          4: name: 'punctuation.definition.klartext.table'
+          3: name: 'keyword.klartext.table'
       },
     ]
 
