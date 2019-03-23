@@ -7,6 +7,7 @@ menu: [
       { label: 'Add Line Numbers', command: 'language-klartext:add_line_numbers' }
       { label: 'Renumber Lines', command: 'language-klartext:renumber_lines' }
       { label: 'Correct number format', command: 'language-klartext:correct_number_format' }
+      { label: 'Keywords to upper case', command: 'language-klartext:keywords_to_upper' }
     ]
   ]
 ]
