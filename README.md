@@ -1,3 +1,8 @@
+# this repo is archived, please do not use this plugin!
+
+
+
+
 # language-klartext theme
 
 Syntax highlighting for the G-Code and other NC related file types.
